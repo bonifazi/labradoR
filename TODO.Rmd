@@ -1,0 +1,7 @@
+# TODO:
+
+-   improve README with more information and show what the pkg can do
+-   take a pedigree as example for doc and (optionally) testing purposes
+-   now there are several dependencies instead they should be import and code should be writing pkg::funct()
+-   remove the 'year' constrain and just use the first column (to make more flexible?)
+-   remove the limits on y-axis and the 5-years groups for x-axis (could be default and then user-defined if wanted)
