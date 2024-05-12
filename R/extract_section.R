@@ -111,10 +111,34 @@ extract_section <- function(lines,
 
     return(extr_data)
   } else {
-    cat(
-      "One or both of the phrases below were not found in the text provided file provided. \n
-      Please check your input file for containing these lines: \n",
-      start_lines, "\n",
-      end_lines)
+    # if string is not found, return what info we are looking for that are not matched
+    # Calculate Jaccard similarity to find closest match
+    similarity <- stringdist::stringdistmatrix(start_with, trimws(lines), method = "jaccard")
+    closest_match <- lines[which.min(similarity)] # Find the closest match
+
+    message_string <- c(
+      "One or both of the phrases below were not found in the provided text file:\n",
+      "Starts with: ", start_with, "\n",
+      "Ends with: ", ends_with, "\n\n",
+      "Please check your input file for containing these lines.\n",
+      "When an exact match is NOT found the function do not run and stats are not extracted."
+    )
+    message_string2 <- c(
+      "\n\nThe closest match found in your provided file is:\n",
+      closest_match,
+      "\n\nPlease open a GitHub issue (see below) and include the following information:\n\n",
+      "1. Description of the problem\n",
+      "2. Output of the closest match found\n\n",
+      "Thank you for your cooperation! \n")
+
+    # GitHub issues link
+    github_issues_link <- "https://github.com/bonifazi/labradoR/issues/new"
+    # Format the message with a clickable link
+    # issue_message <- sprintf('<a href="%s">%s</a>', github_issues_link, "Open GitHub Issue")
+    issue_message <- c("Open GitHub Issue here:\n", github_issues_link)
+
+    # Output the message with the clickable link
+    warning(message_string, "\n", message_string2, "\n", issue_message, "\n")
+
   }
 }

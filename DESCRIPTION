@@ -1,6 +1,6 @@
 Package: labradoR
 Title: Read and Process Retriever's Output.
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
     person("Renzo", "Bonifazi", , "renzo.bonifazi@outlook.it", role = c("aut", "cre"),
            comment = c(ORCID = "https://orcid.org/0000-0002-1794-4708"))
@@ -20,4 +20,5 @@ Depends:
     readr,
     stringr,
     purrr,
-    roxygen2
+    roxygen2,
+    stringdist
