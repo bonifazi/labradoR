@@ -1,5 +1,6 @@
 # TODO:
 
+-   improve error on main functions (extract\_ etc...) now when phrase is not found it returs phrase not found but could return *which* phrases are being searched and being missing. Now returns the name of what has been searching, maybe we can have a closer-match way returned to user with some Rpackage?
 -   improve README with more information and show what the pkg can do
 -   take a pedigree as example for doc and (optionally) testing purposes
 -   now there are several dependencies instead they should be import and code should be writing pkg::funct()

@@ -111,6 +111,10 @@ extract_section <- function(lines,
 
     return(extr_data)
   } else {
-    print("Phrases not found in the content.")
+    cat(
+      "One or both of the phrases below were not found in the text provided file provided. \n
+      Please check your input file for containing these lines: \n",
+      start_lines, "\n",
+      end_lines)
   }
 }
