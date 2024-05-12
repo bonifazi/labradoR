@@ -69,3 +69,8 @@ You are welcome to contribute to the development of `labradoR`.
 
 - Pull Requests: feel free to fork the repository, make your changes,
   and submit a pull request.
+
+## News and Updates
+
+Check out the [NEWS](NEWS.md) file for the latest updates and changes to
+the package.

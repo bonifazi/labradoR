@@ -58,3 +58,7 @@ You are welcome to contribute to the development of `labradoR`.
 -   Bug Reports: If you encounter any bugs or issues while using `labradoR`, please submit a bug report with detailed information about the problem.
 
 -   Pull Requests: feel free to fork the repository, make your changes, and submit a pull request.
+
+## News and Updates
+
+Check out the [NEWS](NEWS.md) file for the latest updates and changes to the package.
