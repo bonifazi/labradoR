@@ -32,6 +32,8 @@ You can install the development version of `labradoR` from
 # install.packages("devtools")
 devtools::install_github("bonifazi/labradoR")
 ```
+## Citation
+todo
 
 ## Example usage
 
