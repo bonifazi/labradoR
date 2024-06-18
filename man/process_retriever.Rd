@@ -4,12 +4,24 @@
 \alias{process_retriever}
 \title{Process Retriever output log file}
 \usage{
-process_retriever(file_name, language)
+process_retriever(
+  file_name,
+  language,
+  verbose = F,
+  xinterval = NULL,
+  delta_intervals = NULL
+)
 }
 \arguments{
 \item{file_name}{A character string with the full path of the Retriever log file.}
 
 \item{language}{A character string specifying the language of the log file ("DUT" for Dutch or "ENG" for English).}
+
+\item{verbose}{Logical. If \code{TRUE}, prints progress messages. Default is \code{FALSE}.}
+
+\item{xinterval}{Numeric. A numeric vector of length 2 specifying the x-axis limits for plots. It can be used to focus on specific years intervals. Default is \code{NULL}, i.e., plots show all years.}
+
+\item{delta_intervals}{Numeric. A numeric vector specifying the intervals for which to compute the annual and generational deltas for inbreeding and kinship. Default is \code{NULL}.}
 }
 \value{
 A list containing processed data (as data frames) and plots for population size, inbreeding, generation intervals, mean age of parents, pedigree completeness, litter size, and top sires' contribution.

@@ -1,8 +1,23 @@
 # TODO:
 
+# Completed
+
 -   [done in Version: 0.0.0.9002] improve error on main functions (extract\_ etc...) now when phrase is not found it returs phrase not found but could return *which* phrases are being searched and being missing. Now returns the name of what has been searching, maybe we can have a closer-match way returned to user with some Rpackage?
+
+## Necessary
+
+-   add calculation of rates for specific time intervals
+
 -   improve README with more information and show what the pkg can do
--   take a pedigree as example for doc and (optionally) testing purposes
+
+-   take a pedigree as example for doc and (optionally) testing purposes -\> the pedigree should be run with ENG and DUT settings to create an .out file that can be packaged in the examples as well
+
 -   now there are several dependencies instead they should be import and code should be writing pkg::funct()
--   remove the 'year' constrain and just use the first column (to make more flexible?)
+
+## Nice to have
+
+-   remove the 'year' constrain and just use the first column (to make more flexible -\> not sure about this?)
+
 -   remove the limits on y-axis and the 5-years groups for x-axis (could be default and then user-defined if wanted)
+
+## Luxury

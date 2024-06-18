@@ -4,10 +4,12 @@
 \alias{make_stacked_lineplot}
 \title{Create a stacked area plot}
 \usage{
-make_stacked_lineplot(data)
+make_stacked_lineplot(data, dots = F)
 }
 \arguments{
 \item{data}{A data frame containing the data to be plotted. First column must be named 'Year'.}
+
+\item{dots}{A logical (default = F) to turn on/off plotting dots following the stacked area lines}
 }
 \value{
 A ggplot object representing the stacked area plot.
