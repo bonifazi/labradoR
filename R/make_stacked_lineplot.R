@@ -3,6 +3,7 @@
 #' This function generates a stacked area plot based on the provided data.
 #'
 #' @param data A data frame containing the data to be plotted. First column must be named 'Year'.
+#' @param dots A logical (default = F) to turn on/off plotting dots following the stacked area lines
 #'
 #' @return A ggplot object representing the stacked area plot.
 #'
@@ -22,13 +23,17 @@
 #'
 #' @export
 
-make_stacked_lineplot <- function(data) {
+make_stacked_lineplot <- function(data, dots = F) {
+  if(dots) {
+    plot_dots <- geom_point(position = "stack") # size = 2
+  } else plot_dots <- NULL
   data %>%
     pivot_longer(cols = -Year,
                  names_to = "group",
                  values_to = "value") %>%
     ggplot(aes(x = Year, y = value, fill = group)) +
     geom_area(color = "black")+
+    plot_dots +
     scale_x_continuous(
       breaks = seq(
         from = find_closest_multiple_of_x(min(data$Year), 5),
