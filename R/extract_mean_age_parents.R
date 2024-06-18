@@ -26,6 +26,7 @@ extract_mean_age_parents <- function(lines, language, parent) {
     if (language == "DUT") {
       start_with <- "LEEFTIJD vaders"
       ends_with = "LEEFTIJD moeders"
+      skip_initial_n_lines = 5
     } else if (
       language == "ENG") {
       start_with <- "AGE fathers"
@@ -37,6 +38,7 @@ extract_mean_age_parents <- function(lines, language, parent) {
     if (language == "DUT") {
       start_with <- "LEEFTIJD moeders"
       ends_with = "GENERATIEINTERVAL"
+      skip_initial_n_lines = 6
     } else if (
       language == "ENG") {
       start_with <- "AGE mothers"
