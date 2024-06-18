@@ -3,10 +3,13 @@
 # Completed
 
 -   [done in Version: 0.0.0.9002] improve error on main functions (extract\_ etc...) now when phrase is not found it returs phrase not found but could return *which* phrases are being searched and being missing. Now returns the name of what has been searching, maybe we can have a closer-match way returned to user with some Rpackage?
+-   add calculation of rates for specific time intervals
 
 ## Necessary
 
--   add calculation of rates for specific time intervals
+-   skip empty intervals (NA can be ignored/removed by default, e.g. FRA pops)
+
+-   See if any other plot is needed (see FRA output in PDF here "WLR\\Rumigen\\Results_partners\\Abondance"
 
 -   improve README with more information and show what the pkg can do
 
@@ -14,7 +17,11 @@
 
 -   now there are several dependencies instead they should be import and code should be writing pkg::funct()
 
+-   add what output looks like in process_retriever.R help?
+
 ## Nice to have
+
+-   a way to pass the order of labels to the plots like make_line_plot where you can pass the names and it use factor ordering to sort them and rename them (maybe the renaming can be in the general process_retriever.R function. --\> see the make_stacked_barplot.R as there is such an approach in it
 
 -   remove the 'year' constrain and just use the first column (to make more flexible -\> not sure about this?)
 
