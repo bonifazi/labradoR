@@ -42,7 +42,7 @@ extract_parent_contribution <- function(lines, language) {
                                    # "sire_name",  # skipped by exclude_between_chr
                                    # "topsire_id", # skipped by exclude_between_chr
                                    paste0(
-                                     "topsire_", c(1:10), "_contribution"
+                                     "topsire ", c(1:10), ""
                                    )
                   ),
   )
