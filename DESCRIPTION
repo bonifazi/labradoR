@@ -22,3 +22,7 @@ Depends:
     purrr,
     roxygen2,
     stringdist
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
