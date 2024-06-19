@@ -15,6 +15,7 @@
 ### Bug fixes
 
 -   Corrected bug in `process_retriever` on `Mean Age Fathers` and `Mean Age Mothers` sections for "DUT" language Retriever .out files
+-   Corrected bug in stacked bar plot to include x-axis start and end limit.
 
 ## Version 0.0.0.9002
 
