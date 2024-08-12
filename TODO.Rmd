@@ -7,9 +7,9 @@
 
 ## Necessary
 
--   skip empty intervals (NA can be ignored/removed by default, e.g. FRA pops)
+-   (is this automatic?) skip empty intervals (NA can be ignored/removed by default, e.g. FRA pops)
 
--   See if any other plot is needed (see FRA output in PDF here "WLR\\Rumigen\\Results_partners\\Abondance"
+-   See if any other plot is needed (see FRA output in PDF here "WLR\\Rumigen\\Results_partners\\Abondance" --\> only missing one seems to be the one saying "total number calves per parent over entire life" with two line plot one for "fathers" and one for "mothers" -\> not sure what these are (ask Jack)
 
 -   improve README with more information and show what the pkg can do
 
@@ -19,7 +19,11 @@
 
 -   add what output looks like in process_retriever.R help?
 
+-   in population statistics -\> consider (if not in contrast with output log) to rename sires_unused -\> males_not_sires Dams_unused -\> females_not_dams. In the output of Retreiver PDFs they are called "females valves later mother", "females calves later no mother", "male calves later father", "male calves later no father"
+
 ## Nice to have
+
+-   
 
 -   a way to pass the order of labels to the plots like make_line_plot where you can pass the names and it use factor ordering to sort them and rename them (maybe the renaming can be in the general process_retriever.R function. --\> see the make_stacked_barplot.R as there is such an approach in it
 

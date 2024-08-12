@@ -1,8 +1,8 @@
 ---
-title: "Introduction to labradoR R package"
+title: "Introduction to the labradoR R package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to labradoR R package}
+  %\VignetteIndexEntry{Introduction to the labradoR R package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,8 +14,38 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Introduction
+
+Clearly explain what your package does and what problem it solves
+
+# Installation
+
+To install the `labradoR` package use:
+
+\`\`
+
+Then load it as follows:
+
 ```{r setup}
 library(labradoR)
 
 
 ```
+
+# Getting started
+
+Show a simple example to get users started quickly.
+
+# Detailed example
+
+Provide several detailed examples covering the main functionalities of your package.
+
+#other points:
+
+-   Additional Features: Highlight any additional features or advanced usage scenarios.
+
+# Conclusion
+
+Summarize the vignette and provide pointers to further resources
+
+

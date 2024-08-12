@@ -95,6 +95,7 @@ process_retriever <- function(file_name, language, verbose = F, xinterval = NULL
     select(-average_generation_equivalent) %>%
     setNames(., c("Year", "1", "2", "3", "4", "5+")) %>%
     make_stacked_lineplot(dots = T) +
+    ylim(0,1) +
     interval +
     theme(legend.position = "bottom") +
     scale_fill_discrete(breaks = c("1", "2", "3", "4", "5+")) +
@@ -102,7 +103,7 @@ process_retriever <- function(file_name, language, verbose = F, xinterval = NULL
          subtitle = "Percentage of animals with N generations in pedigree completely known")
 
   # plot average number of generation equivalent
-  results$average_generation_equivalent <-  results$pedigree_completeness %>%
+  results$average_generation_equivalent_plot <-  results$pedigree_completeness %>%
     select(Year, average_generation_equivalent) %>%
     make_linepoint_plot()
 

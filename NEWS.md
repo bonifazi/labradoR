@@ -8,7 +8,7 @@
     -   `xinterval` argument to pass an interval to subset x-axis in plots
     -   `verbose` argument to return more information while processing Retriever file
     -   Added (structured and sequential) comments sections
--   Improved sires contirbution figure
+-   Improved sires contribution figure
 -   Pedigree completeness: improved figure & added separate plot for average number generation equivalents.
 -   Added \`compute_deltas()\` which returns annual and generational deltas.
 
