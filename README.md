@@ -9,7 +9,7 @@
 
 <!-- badges: end -->
 
-<img src="man/figures/logo_labrador.png" align="right" width="200"/>
+<img src="man/figures/logo_labradoR.png" align="right" width="200"/>
 
 The goal of `labradoR` R package is to facilitating the handling and
 post-processing of the
