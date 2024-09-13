@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 # labradoR
 
 <!-- badges: start -->
@@ -20,6 +21,8 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
+
+<img src="man/figures/logo_labrador.png" align="right" width="200"/>
 
 The goal of `labradoR` R package is to facilitating the handling and post-processing of the [`Retriever`](https://genebankdata.cgn.wur.nl/software/software.html) software output. Retriever is a software for pedigree analysis that generates many statistics and plots. For more information please refer to the [official software website](https://genebankdata.cgn.wur.nl/software/software.html) and it associated [publication](https://www.mdpi.com/2076-2615/11/5/1332).
 
@@ -46,6 +49,10 @@ The below is a basic example showing the package usage. As input, you need to pr
     str(output, max.levels = 1, give.attr = F)
 
 Note: since the logic of `labradoR` is that of "fetching" lines from Retriever's output, if anything changes in the format of the `.out` file, then `labradoR`'s associated code will need to be adapted accordingly.
+
+## Citation
+<to add>
+
 
 ## Contributing
 

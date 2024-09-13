@@ -9,6 +9,8 @@
 
 <!-- badges: end -->
 
+<img src="man/figures/logo_labrador.png" align="right" width="200"/>
+
 The goal of `labradoR` R package is to facilitating the handling and
 post-processing of the
 [`Retriever`](https://genebankdata.cgn.wur.nl/software/software.html)
@@ -32,8 +34,6 @@ You can install the development version of `labradoR` from
 # install.packages("devtools")
 devtools::install_github("bonifazi/labradoR")
 ```
-## Citation
-todo
 
 ## Example usage
 
@@ -55,6 +55,10 @@ Note: since the logic of `labradoR` is that of “fetching” lines from
 Retriever’s output, if anything changes in the format of the `.out`
 file, then `labradoR`’s associated code will need to be adapted
 accordingly.
+
+## Citation
+
+<to add>
 
 ## Contributing
 
