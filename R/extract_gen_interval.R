@@ -22,18 +22,18 @@
 extract_gen_interval <- function(lines, language) {
   if (language == "DUT") {
     start_with <- "GENERATIEINTERVAL"
-    ends_with = "COMPLEETHEID stamboom"
+    ends_with  <- "COMPLEETHEID stamboom"
   } else if (
     language == "ENG") {
     start_with <- "GENERATION INTERVAL"
-    ends_with = "PEDIGREE COMPLETENESS"
+    ends_with  <- "PEDIGREE COMPLETENESS"
   }
 
   extract_section(lines = lines,
                   start_with = start_with,
                   ends_with = ends_with,
-                  skip_initial_n_lines = 5,
-                  skip_last_n_lines = 5,
+                  skip_initial_n_lines <- 5,
+                  skip_last_n_lines <- 5,
                   column_names = c("Year",
                                    "mean_age_sires",
                                    "mean_age_dams",

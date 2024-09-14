@@ -22,11 +22,11 @@
 extract_pedigree_completeness <- function(lines, language) {
   if (language == "DUT") {
     start_with <- "COMPLEETHEID stamboom"
-    ends_with = "Topvaders en hun aandeel per jaar"
+    ends_with  <- "Topvaders en hun aandeel per jaar"
   } else if (
     language == "ENG") {
     start_with <- "PEDIGREE COMPLETENESS"
-    ends_with = "Top sires and their contribution per year"
+    ends_with  <- "Top sires and their contribution per year"
   }
 
   extract_section(lines = lines,

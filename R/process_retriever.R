@@ -31,6 +31,8 @@ process_retriever <- function(file_name, language, verbose = F, xinterval = NULL
 
   # 1. Read the entire text file ----
   file_content <- readr::read_file(file_name)
+  # [possible base approach to remove readr dependency]
+  # file_content <- paste(readLines(file_name, warn = FALSE), collapse = "\n")
 
   # 2. Split the content into lines ----
   content_lines <- content_lines <- stringr::str_split(file_content, "\n")[[1]]

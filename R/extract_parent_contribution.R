@@ -22,11 +22,11 @@
 extract_parent_contribution <- function(lines, language) {
   if (language == "DUT") {
     start_with <- "Topvaders en hun aandeel per jaar"
-    ends_with = "INTEELT"
+    ends_with  <- "INTEELT"
   } else if (
     language == "ENG") {
     start_with <- "Top sires and their contribution per year"
-    ends_with = "INBREEDING"
+    ends_with  <- "INBREEDING"
   }
 
   extract_section(lines = lines,

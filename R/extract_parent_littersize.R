@@ -22,11 +22,11 @@
 extract_parent_littersize <- function(lines, language) {
   if (language == "DUT") {
     start_with <- "aantal ouders en nestgrootte per jaar"
-    ends_with = "Worpgrootte"
+    ends_with  <- "Worpgrootte"
   } else if (
     language == "ENG") {
     start_with <- "Number of parents and litter size per year"
-    ends_with = "Litter Sizes"
+    ends_with  <- "Litter Sizes"
   }
 
   extract_section(lines = lines,

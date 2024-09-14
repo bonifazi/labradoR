@@ -21,11 +21,11 @@
 extract_pop_size <- function(lines, language) {
   if (language == "DUT") {
     start_with <- "POPULATIEOMVANG: aantal"
-    ends_with = "totaal aantal dieren in stamboom"
+    ends_with  <- "totaal aantal dieren in stamboom"
   } else if (
     language == "ENG") {
     start_with <- "POPULATIONSIZE: number"
-    ends_with = "total number of animals in pedigree"
+    ends_with  <- "total number of animals in pedigree"
   }
 
   extract_section(
