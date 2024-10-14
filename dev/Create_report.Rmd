@@ -1,0 +1,87 @@
+---
+title: "Simulation Results Report"
+date: "`r Sys.Date()`"
+params:
+  input_file: "C:/Users/bonif002/Downloads/tmp/Retriever/www/upload/test_ped.out"
+  language: "ENG"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Load necessary libraries
+library(ggplot2)
+library(knitr)
+```
+
+```{r process retriever file with labradoR}
+sim_results <- labradoR::process_retriever(params$input_file, language = params$language)
+
+```
+
+# Description
+
+Report generated from retriever output file using the {labradoR} R package.
+
+Given input file is `r params$input_file`, with `r params$language` as language.
+
+## Population size
+
+```{r}
+kable(sim_results$pop_size)
+print(sim_results$pop_size_plot)
+```
+
+## Inbreeding
+
+```{r}
+kable(sim_results$inbreeding)
+print(sim_results$inbreeding_plot)
+```
+
+## Generation intervals
+
+```{r}
+kable(sim_results$gen_intervals)
+print(sim_results$gen_intervals_plot)
+```
+
+## Mean Age of Fathers
+
+```{r}
+kable(sim_results$mean_age_fathers)
+print(sim_results$mean_age_fathers_plot)
+```
+
+## Mean Age of Mothers
+
+```{r}
+kable(sim_results$mean_age_mothers)
+print(sim_results$mean_age_mothers_plot)
+```
+
+## Pedigree completeness
+
+```{r}
+kable(sim_results$pedigree_completeness)
+print(sim_results$pedigree_completeness_plot)
+```
+
+## Average Generation Equivalent
+
+```{r}
+print(sim_results$average_generation_equivalent_plot)
+```
+
+## Litter size
+
+```{r}
+kable(sim_results$littersize)
+print(sim_results$littersize_plot)
+```
+
+## Top Sires
+
+```{r}
+kable(sim_results$topsires)
+print(sim_results$topsires_plot)
+```
