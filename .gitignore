@@ -4,7 +4,10 @@
 .httr-oauth
 .DS_Store
 .quarto
-dev/
 inst/doc
 /doc/
 /Meta/
+dev/Rumigen_paper/
+dev/older_dev/*
+dev/report/*
+
