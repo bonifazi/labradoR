@@ -11,6 +11,8 @@
 -   Improved sires contribution figure
 -   Pedigree completeness: improved figure & added separate plot for average number generation equivalents.
 -   Added \`compute_deltas()\` which returns annual and generational deltas.
+-   Added logo.
+-   Small syntax improvements.
 
 ### Bug fixes
 
