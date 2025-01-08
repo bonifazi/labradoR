@@ -1,5 +1,9 @@
 # labradoR (development version)
 
+## Version 1.0.0
+
+First release
+
 ## Version 0.0.0.9004
 
 ### Enhancements
