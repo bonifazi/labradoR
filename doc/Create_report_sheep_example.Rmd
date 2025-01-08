@@ -2,9 +2,9 @@
 title: "Simulation Results Report"
 date: "`r Sys.Date()`"
 params:
-  input_file: "C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/sheep_ped.out"
-  language: "ENG"
-output: html_document
+  input_file: C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/sheep_ped.out
+  language: ENG
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
