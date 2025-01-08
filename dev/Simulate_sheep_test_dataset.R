@@ -24,7 +24,7 @@ for (index in 1:nrow(pedigree)) {
 sheep_merged <- cbind(pedigree, time) %>%
   as.data.frame() %>%
   mutate(
-    YOB = paste0(2004 + time, "-01-01") # assig a birthdate based on the time point
+    YOB = paste0(2004 + time, "-01-01") # assign a birth date based on the time point
   ) %>%
   left_join(pedigree_info %>% as.data.frame() %>%
     select(
@@ -38,23 +38,26 @@ sheep_merged <- cbind(pedigree, time) %>%
 
 dim(sheep_merged)
 head(sheep_merged)
-sheep_merged %>% count(birthdate, sex)
+sheep_merged %>% count(birthdate, time, sex)
 
 # assign sex
 sheep_merged <- sheep_merged %>%
+  distinct() %>%
+  rowwise() %>%
   mutate(sex = case_when(
+    !is.na(sex) ~ sex, # keep assigned sex if existent
     ID %in% sheep_merged$sire ~ "M",
-    ID %in% sheep_merged$dam ~ "F",
-    # sample sex if individual is not sire or dam
-    is.na(sex) ~ if_else(runif(n()) < 0.5, "M", "F")) # sample a number, if < 0.5 assign M, otherwise F
-  )
+    ID %in% sheep_merged$dam  ~ "F",
+    TRUE ~ sample(c("M", "F"), size = 1, replace = TRUE) # Randomly assign M or F only if still NA
+    )
+  ) %>%
+  ungroup()
 
-sheep_merged %>%
-  count(birthdate, time, sex)
+sheep_merged %>% count(birthdate, time, sex)
 
 # 3. Save output to disk --------------------------------------------------
 write.table(sheep_merged,
-  "C:/Users/bonif002/Downloads/tmp/Retriever/www/upload/test_ped.txt",
+  "C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/upload/sheep_ped.txt",
   sep = ";",
   quote = F,
   row.names = F
@@ -68,7 +71,7 @@ setwd("C:/Users/bonif002/Downloads/tmp/Retriever/www")
 # Create the content for the inbreedingmonitor.ini file
 inbreedingmonitor_content <- c(
   "Sheep simple JSON",   # name of run
-  "upload/test_ped.txt", # name of pedigree file
+  "upload/sheep_ped.txt", # name of pedigree file
   ";",                   # delimiter
   "n",
   "yyyy-mm-dd",          # date of birth format
@@ -87,7 +90,7 @@ writeLines(inbreedingmonitor_content, "inbreedingmonitor.ini")
 system("inteeltmonitor007.exe")
 setwd("C:/Rpkgs/packages_development/labradoR/dev")
 
-# 5. Collect output and create the report check --------------------------------------
+# 5. Collect output and create the report check --------------------------------
 library(rmarkdown)
 
 # Create the report folder if it doesn't exist
@@ -100,9 +103,9 @@ rmarkdown::render(
   "Create_report.Rmd",
   output_file = "report/simulation_report.html",
   params = list(
-    input_file = "C:/Users/bonif002/Downloads/tmp/Retriever/www/upload/test_ped.out",
+    input_file = "C:/Users/bonif002/Downloads/tmp/Retriever/www/upload/sheep_ped.out",
     language = "ENG"
     )
 )
 
-
+#### END -----------------------------------------------------------------------

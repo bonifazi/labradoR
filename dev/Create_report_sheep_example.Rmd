@@ -2,7 +2,7 @@
 title: "Simulation Results Report"
 date: "`r Sys.Date()`"
 params:
-  input_file: "C:/Users/bonif002/Downloads/tmp/Retriever/www/upload/test_ped.out"
+  input_file: "C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/sheep_ped.out"
   language: "ENG"
 output: html_document
 ---
@@ -15,7 +15,6 @@ library(knitr)
 
 ```{r process retriever file with labradoR}
 sim_results <- labradoR::process_retriever(params$input_file, language = params$language)
-
 ```
 
 # Description

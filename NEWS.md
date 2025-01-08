@@ -1,18 +1,34 @@
 # labradoR (development version)
 
+## Version 0.0.0.9004
+
+### Enhancements
+
+-   Improved README
+
+-   Added example output using sheep simulated pedigree
+
 ## Version 0.0.0.9003
 
 ### Enhancements
 
 -   Added options to `process_retriever`:
+
     -   `xinterval` argument to pass an interval to subset x-axis in plots
     -   `verbose` argument to return more information while processing Retriever file
     -   Added (structured and sequential) comments sections
+
 -   Improved sires contribution figure
+
 -   Pedigree completeness: improved figure & added separate plot for average number generation equivalents.
+
 -   Added \`compute_deltas()\` which returns annual and generational deltas.
+
 -   Added logo.
+
 -   Small syntax improvements.
+
+-   [in progress:] Created script for reporting and running retriever from within R
 
 ### Bug fixes
 
