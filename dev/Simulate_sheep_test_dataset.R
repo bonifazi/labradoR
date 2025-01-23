@@ -57,7 +57,7 @@ sheep_merged %>% count(birthdate, time, sex)
 
 # 3. Save output to disk --------------------------------------------------
 write.table(sheep_merged,
-  "C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/upload/sheep_ped.txt",
+  "C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/sheep_ped.txt",
   sep = ";",
   quote = F,
   row.names = F
@@ -65,7 +65,7 @@ write.table(sheep_merged,
 
 # 4. Run Retriever .exe --------------------------------------------------
 # 4.1 move in Retriever.exe dir
-setwd("C:/Users/bonif002/Downloads/tmp/Retriever/www")
+setwd("C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/")
 
 # 4.2 Create the .ini file
 # Create the content for the inbreedingmonitor.ini file
@@ -103,7 +103,7 @@ rmarkdown::render(
   "Create_report.Rmd",
   output_file = "report/simulation_report.html",
   params = list(
-    input_file = "C:/Users/bonif002/Downloads/tmp/Retriever/www/upload/sheep_ped.out",
+    input_file = "C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/sheep_ped.out",
     language = "ENG"
     )
 )
