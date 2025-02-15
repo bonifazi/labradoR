@@ -1,4 +1,47 @@
-# labradoR (development version)
+# labradoR
+
+## Version 1.1.0
+
+### Enhancements
+
+1.  **Improved Section Extraction**:
+    -   These changes make `labradoR` compatible with (and were tested on) Retriever version complied on `08.02.2025` .
+
+    -   Added `extract_text`, a generalized function for extracting sections from Retriever’s `.out` files, making subsequent `extract_` functions cleaner and more maintainable.
+
+    -   Introduced `fixed_col_width` argument in `extract_section` to handle fixed-width extraction, ensuring correct data frame dimensions even with missing or truncated columns.
+
+    -   Adapted `extract_` functions (`extract_inbreeding`, `extract_parent_contribution`, `extract_parent_littersize`, `extract_pedigree_completeness`) to use `extract_text` and removed unnecessary arguments.
+
+    -   Moved to use `fixed_col_width` in functions `extract_inbreeding`, `extract_parent_contribution`, `extract_parent_littersize`, `extract_pedigree_completeness`.
+2.  **Updated Column Formats**:
+    -   Adjusted column names to match new formats in Retriever’s output:
+
+        -   Pedigree completeness: Added support for the `0` column.
+
+        -   Population size: Updated sex ratio extraction.
+3.  **New Plot: Sex Ratio**:
+    -   Added `sex_ratio_plot` to visualize the percentage of male calves over time.
+4.  **Improved Plot Visualizations**:
+    -   Enhanced pedigree completeness plot:
+
+        -   Normalized the 0 to 5+ years scale to address rounding issues.
+
+        -   Used shades of blue for clearer representation.
+
+    -   Minor improvements to titles, legends, and overall aesthetics across all plots.
+5.  **Better Debugging Features**:
+    -   Implemented `safe_extract` using `tryCatch` to log errors and warnings.
+
+    -   Added `return_error_log` argument in `process_retriever` to return logged errors alongside results (accessible via `.$error_log`).
+
+    -   Set `verbose = TRUE` by default in `process_retriever` for more informative progress messages.
+
+### Minor improvements
+
+-   Updated function documentation for clarity.
+
+-   Improved error messages to include the closest match when strings are not found
 
 ## Version 1.0.0
 

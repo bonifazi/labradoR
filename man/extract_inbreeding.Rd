@@ -9,10 +9,23 @@ extract_inbreeding(lines, language)
 \arguments{
 \item{lines}{A character vector containing the lines of text from Retriever.}
 
-\item{language}{A character string specifying the language of the text ("DUT" for Dutch or "ENG" for English).}
+\item{language}{A character string specifying the language of the text. Supported values are:
+\itemize{
+\item \code{"DUT"} for Dutch
+\item \code{"ENG"} for English
+}}
 }
 \value{
-A data frame representing the extracted inbreeding information.
+A data frame containing extracted inbreeding and kinship information with the following columns:
+\itemize{
+\item \code{Year} -  The year of birth of animals.
+\item \code{F_all_animals} - The average inbreeding coefficient for all individuals born in a year.
+\item \code{f_inc.self} - The average kinship coefficient (including selfing) for all individuals born in a year.
+\item \code{f_exc.self} - The average kinship coefficient (excluding selfing) for all individuals born in a year.
+\item \code{f_parents} - The average kinship coefficient (excluding selfing) for animals born in a year, which later become a parent.
+\item \code{f_sires} - The average kinship coefficient (excluding selfing) for animals born in a year, which later become a sire.
+\item \code{f_dams} - The average kinship coefficient (excluding selfing) for animals born in a year, which later become a dam.
+}
 }
 \description{
 This function extracts inbreeding information from text lines based on the specified language.
@@ -26,4 +39,7 @@ lines <- c("INBREEDING",
            " "," "," "," ")
 extract_inbreeding(lines, "ENG")
 
+}
+\seealso{
+\code{\link{extract_text}}, \code{\link{extract_section}}
 }

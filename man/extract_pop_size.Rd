@@ -28,3 +28,6 @@ lines <- c("POPULATIONSIZE: number of calves born per year",
 extract_pop_size(lines, "ENG")
 
 }
+\seealso{
+\code{\link{extract_text}}, \code{\link{extract_section}}
+}

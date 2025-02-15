@@ -28,3 +28,6 @@ lines <- c("Top sires and their contribution per year",
 extract_parent_contribution(lines, "ENG")
 
 }
+\seealso{
+\code{\link{extract_text}}, \code{\link{extract_section}}
+}

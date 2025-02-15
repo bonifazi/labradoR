@@ -14,7 +14,11 @@ extract_mean_age_parents(lines, language, parent)
 \item{parent}{A character string ("fathers" for sires or "mothers" for dams).}
 }
 \value{
-A data frame representing the extracted mean age of parents information.
+A data frame containing the extracted mean age of parents information with columns:
+\itemize{
+\item Year of birth
+\item Average age of parents (in years)
+}
 }
 \description{
 This function extracts the mean age of parents information from text lines based on the specified language.
@@ -29,4 +33,8 @@ lines <- c("AGE fathers",
            "AGE mothers")
 extract_mean_age_parents(lines, "ENG", parent = "fathers")
 
+
+}
+\seealso{
+\code{\link{extract_text}}, \code{\link{extract_section}}
 }

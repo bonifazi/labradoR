@@ -28,3 +28,6 @@ lines <- c("Number of parents and litter size per year",
 extract_parent_littersize(lines, "ENG")
 
 }
+\seealso{
+\code{\link{extract_text}}, \code{\link{extract_section}}
+}

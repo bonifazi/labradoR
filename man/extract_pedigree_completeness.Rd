@@ -28,3 +28,6 @@ lines <- c("PEDIGREE COMPLETENESS",
 extract_pedigree_completeness(lines, "ENG")
 
 }
+\seealso{
+\code{\link{extract_text}}, \code{\link{extract_section}}
+}
