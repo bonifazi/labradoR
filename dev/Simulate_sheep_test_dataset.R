@@ -87,21 +87,22 @@ inbreedingmonitor_content <- c(
 writeLines(inbreedingmonitor_content, "inbreedingmonitor.ini")
 
 # 4.4 call .exe
-system("inteeltmonitor007.exe")
-setwd("C:/Rpkgs/packages_development/labradoR/dev")
+# system("inteeltmonitor007.exe")
+system("inteeltmonitor.exe")
+setwd("C:/Rpkgs/packages_development/labradoR/doc")
 
 # 5. Collect output and create the report check --------------------------------
 library(rmarkdown)
 
 # Create the report folder if it doesn't exist
-if (!dir.exists("report")) {
-  dir.create("report")
-}
+# if (!dir.exists("report")) {
+#   dir.create("report")
+# }
 
 # 6. Render the R Markdown report into the 'report' folder
 rmarkdown::render(
-  "Create_report.Rmd",
-  output_file = "report/simulation_report.html",
+  "Create_report_sheep_example.Rmd",
+  output_file = "Create_report_sheep_example",
   params = list(
     input_file = "C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/sheep_ped.out",
     language = "ENG"
