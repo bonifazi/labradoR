@@ -1,33 +1,42 @@
-#' Process Retriever output log file
+#' Process Retriever Output Log File
 #'
-#' This function processes a Retriever output log file, extracting various metrics and generating plots based on the content.
+#' This function processes a Retriever output log file, extracting various population metrics and generating corresponding plots based on the content.
 #'
 #' @param file_name A character string with the full path of the Retriever log file.
-#' @param language A character string specifying the language of the log file ("DUT" for Dutch or "ENG" for English).
-#' @param verbose Logical. If `TRUE`, prints progress messages. Default is `FALSE`.
-#' @param xinterval Numeric. A numeric vector of length 2 specifying the x-axis limits for plots. It can be used to focus on specific years intervals. Default is `NULL`, i.e., plots show all years.
-#' @param delta_intervals Numeric. A numeric vector specifying the intervals for which to compute the annual and generational deltas for inbreeding and kinship. Default is `NULL`.
-#'
-#' @return A list containing processed data (as data frames) and plots for population size, inbreeding, generation intervals, mean age of parents, pedigree completeness, litter size, and top sires' contribution.
+#' @param language A character string specifying the language of the log file. Valid options are "DUT" (Dutch) or "ENG" (English).
+#' @param verbose A logical value. If `TRUE`, prints progress messages. Default is `TRUE`.
+#' @param xinterval A numeric vector of length 2 specifying the x-axis limits for plots. It can be used to focus on specific year intervals. Default is `NULL`, meaning plots will show all available years.
+#' @param delta_intervals A numeric vector specifying the intervals (in years) for which to compute the annual and generational deltas for inbreeding and kinship. Default is `NULL`, meaning deltas will not be computed.
+#' @param return_error_log A logical value. If `TRUE`, returns a list containing the results as well as a log of any errors or warnings encountered during processing. Default is `FALSE`.
+#' @return A list containing processed data (as data frames) and plots for varius metrics, including:
+#'   - Population size
+#'   - Inbreeding
+#'   - Generation intervals
+#'   - Mean age of parents (fathers and mothers)
+#'   - Pedigree completeness
+#'   - Litter size
+#'   - Top sires' contribution
+#'   If `return_error_log` is `TRUE`, the returned list will also include an error log.
 #'
 #' @examples
 #' # Process a Retriever log file in English
 #' # results <- process_retriever("path/to/retriever.log", "ENG")
 #'
 #' # Access processed data and plots
-#' # str(results, max.level = 1, give.attr = F) # look into the extracted data frames and plots
+#' # str(results, max.level = 1, give.attr = FALSE) # look into the extracted data frames and plots
 #' # results$pop_size # Population size data
 #' # results$pop_size_plot # Population size plot
 #'
-#' @import stringr readr ggplot2
 #' @importFrom stringr str_split
-#' @importFrom readr   read_file
-#' @importFrom dplyr    %>%
+#' @importFrom readr read_file
+#' @importFrom dplyr %>% mutate select starts_with any_of rowwise across c_across ungroup contains
+#' @import ggplot2
 #'
 #' @export
 
-process_retriever <- function(file_name, language, verbose = F, xinterval = NULL, delta_intervals = NULL) {
+process_retriever <- function(file_name, language, verbose = T, xinterval = NULL, delta_intervals = NULL, return_error_log = FALSE) {
   results <- list() # store results in a list
+  error_log <- list() # store errors and warnings
 
   # 1. Read the entire text file ----
   file_content <- readr::read_file(file_name)
@@ -51,87 +60,135 @@ process_retriever <- function(file_name, language, verbose = F, xinterval = NULL
 
   # 4. Extract sections (order is not important) ----
   # ___4.1 Population size ----
-  if (verbose) { cat("\n Extracting population size") }
-  results$pop_size <- extract_pop_size(content_lines, language = language)
-  results$pop_size_plot <- make_linepoint_plot(data = results$pop_size) +
-    interval +
-    labs(y = "Number") + labs(title = "Population size")
+  if (verbose) { cat("\n >> Extracting Population Size") }
+
+  results$pop_size <- safe_extract(extract_pop_size, content_lines, language)
+
+  if(!is.null(results$pop_size)) {
+    results$pop_size_plot <- make_linepoint_plot(
+      data = results$pop_size[, setdiff(colnames(results$pop_size), "%_males_calves")]) + # do not plot sex_ratio %_males_calves
+      interval +
+      labs(y = "Number") + labs(title = "Population size")
+    # sex ratio in a separate plot (due to its scale)
+    results$sex_ratio_plot <- make_linepoint_plot(
+      data = results$pop_size[, c("Year", "%_males_calves"), drop = F]) +
+      interval +
+      labs(y = "Number") + labs(title = "Sex ratio (% of male calves)")
+  }
 
   # ___4.2 Inbreeding ----
-  if (verbose) { cat("\n Extracting inbreeding") }
-  results$inbreeding <- extract_inbreeding(content_lines, language = language)
-  results$inbreeding_plot <- make_linepoint_plot(data = results$inbreeding) +
-    interval +
-    labs(title = "Inbreeding & kinship")
+  if (verbose) { cat("\n >> Extracting Inbreeding") }
+  results$inbreeding <- safe_extract(extract_inbreeding, content_lines, language)
+
+  if(!is.null(results$inbreeding)) {
+    results$inbreeding_plot <- make_linepoint_plot(data = results$inbreeding) +
+      interval +
+      labs(title = "Inbreeding & kinship")
+  }
 
   # ___4.3. Generation Intervals ----
-  if (verbose) { cat("\n Generation Intervals") }
-  results$gen_intervals <- extract_gen_interval(content_lines, language = language)
-  results$gen_intervals_plot <- make_linepoint_plot(data = results$gen_intervals) +
-    interval +
-    ylab("") + labs(title = "gen. intervals")
+  if (verbose) { cat("\n >> Extracting Generation Intervals") }
+  results$gen_intervals <- safe_extract(extract_gen_interval, content_lines, language)
+
+  if(!is.null(results$gen_intervals_plot)) {
+    results$gen_intervals_plot <- make_linepoint_plot(data = results$gen_intervals) +
+      interval +
+      ylab("") + labs(title = "Generation intervals")
+  }
 
   # ___4.4. Mean Age Fathers ----
-  if (verbose) { cat("\n Mean Age of Fathers") }
-  results$mean_age_fathers <- extract_mean_age_parents(content_lines, language = language, parent = "fathers")
-  results$mean_age_fathers_plot <- results$mean_age_fathers %>%
-    mutate("Age_10+" = rowSums(select(., starts_with("Age_"))[, -c(1:10)])) %>% # group all 10+ as single col
-    select(any_of(c("Year", paste0("Age_", c(1:10)), "Age_10+"))) %>%
-    make_stacked_lineplot() +
-    interval
+  if (verbose) { cat("\n >> Extracting Mean Age of Fathers") }
+  results$mean_age_fathers <- safe_extract(extract_mean_age_parents, content_lines, language, parent = "fathers")
+
+  if(!is.null(results$mean_age_fathers)) {
+    results$mean_age_fathers_plot <- results$mean_age_fathers %>%
+      mutate("Age_10+" = rowSums(select(., starts_with("Age_"))[, -c(1:10)])) %>% # group all 10+ as single col
+      select(any_of(c("Year", paste0("Age_", c(1:10)), "Age_>10"))) %>%
+      make_stacked_lineplot() +
+      labs(title = "Mean age of fathers") +
+      interval
+  }
 
   # ___4.5. Mean Age Mothers ----
-  if (verbose) { cat("\n Mean Age of Mothers") }
-  results$mean_age_mothers <- extract_mean_age_parents(content_lines, language = language, parent = "mothers")
-  results$mean_age_mothers_plot <- results$mean_age_mothers %>%
-    mutate("Age_10+" = rowSums(select(., starts_with("Age_"))[, -c(1:10)])) %>% # group all 10+ as single col
-    select(any_of(c("Year", paste0("Age_", c(1:10)), "Age_10+"))) %>%
-    make_stacked_lineplot() +
-    interval
+  if (verbose) { cat("\n >> Extracting Mean Age of Mothers") }
+  results$mean_age_mothers <- safe_extract(extract_mean_age_parents, content_lines, language, parent = "mothers")
+
+  if(!is.null(results$mean_age_mothers)){
+    results$mean_age_mothers_plot <- results$mean_age_mothers %>%
+      mutate("Age_10+" = rowSums(select(., starts_with("Age_"))[, -c(1:10)])) %>% # group all 10+ as single col
+      select(any_of(c("Year", paste0("Age_", c(1:10)), "Age_>10"))) %>%
+      make_stacked_lineplot() +
+      labs(title = "Mean age of mothers") +
+      interval
+  }
 
   # ___4.6. Pedigree Completeness ----
-  if (verbose) { cat("\n Pedigree Completeness") }
-  results$pedigree_completeness <- extract_pedigree_completeness(content_lines, language = language)
-  results$pedigree_completeness_plot <- results$pedigree_completeness %>%
-    # rename cols & skip average_generation_equivalent
-    select(-average_generation_equivalent) %>%
-    setNames(., c("Year", "1", "2", "3", "4", "5+")) %>%
-    make_stacked_lineplot(dots = T) +
-    ylim(0,1) +
-    interval +
-    theme(legend.position = "bottom") +
-    scale_fill_discrete(breaks = c("1", "2", "3", "4", "5+")) +
-    labs(title = "Pedigree completedness",
-         subtitle = "Percentage of animals with N generations in pedigree completely known")
+  if (verbose) { cat("\n >> Extracting Pedigree Completeness") }
+  results$pedigree_completeness <- safe_extract(extract_pedigree_completeness, content_lines, language)
 
-  # plot average number of generation equivalent
-  results$average_generation_equivalent_plot <-  results$pedigree_completeness %>%
-    select(Year, average_generation_equivalent) %>%
-    make_linepoint_plot()
+  if(!is.null(results$pedigree_completeness)){
+    # results$pedigree_completeness_plot <-
+      results$pedigree_completeness %>%
+      # rename cols & skip average_generation_equivalent
+      select(-average_generation_equivalent) %>%
+      setNames(., c("Year", "0", "1", "2", "3", "4", "5+")) %>%
+      # standardize 0 to 5+ values on a 0-100% scale (this is for fixing some rounding for which the sum is 0.99 or 1.01)
+      rowwise() %>%
+      mutate(across('0':'5+', ~ . / sum(c_across('0':'5+')))) %>%
+      ungroup() %>%
+      make_stacked_lineplot(dots = T) +
+      ylim(0,1.01) + # the .01 is to avoid small roundings corrections in ggplot
+      interval +
+      theme(legend.position = "bottom") +
+      # scale_fill_discrete(breaks = c("0", "1", "2", "3", "4", "5+")) +
+      scale_fill_manual(values = c("0" = "#e0f7fa", "1" = "#b2ebf2", "2" = "#80deea", "3" = "#4dd0e1", "4" = "#26c6da", "5+" = "#0079a1")) +
+      labs(title = "Pedigree completedness",
+           subtitle = "Percentage of animals with N generations in pedigree completely known")
+
+    # plot average number of generation equivalent
+    results$average_generation_equivalent_plot <- results$pedigree_completeness %>%
+      select(Year, average_generation_equivalent) %>%
+      make_linepoint_plot() +
+      labs(title = "Average generation equivalent") +
+      theme(legend.position = "bottom")
+  }
 
   # ___4.7. Litter Size Information ----
-  if (verbose) { cat("\n Litter Size Information") }
-  results$littersize <- extract_parent_littersize(content_lines, language = language)
-  results$littersize_plot <- make_linepoint_plot(data = results$littersize) +
-    interval +
-    theme(legend.position = "bottom") + labs(title = "Litter size")
+  if (verbose) { cat("\n >> Extracting Litter Size Information") }
+  results$littersize <- safe_extract(extract_parent_littersize, content_lines, language)
+
+  if(!is.null(results$littersize)) {
+    results$littersize_plot <- make_linepoint_plot(data = results$littersize) +
+      interval +
+      theme(legend.position = "bottom") + labs(title = "Litter size")
+  }
 
   # ___4.8. Top Sires Contribution ----
-  if (verbose) { cat("\n Top Sires Contribution") }
-  results$topsires <- extract_parent_contribution(content_lines, language = language)
-  results$topsires_plot <- results$topsires %>%
-    select(Year, contains("topsire")) %>%
-    make_stacked_barplot(levels_order = paste0("topsire ", 10:1)) +
-    ylab("Percentage") +
-    interval_ext +
-    theme(legend.position = "bottom") + labs(title = "Top sires contribution")
+  if (verbose) { cat("\n >> Extracting Top Sires Contribution") }
+  results$topsires <- safe_extract(extract_parent_contribution, content_lines, language)
+
+  if(!is.null(results$topsires)){
+    results$topsires_plot <- results$topsires %>%
+      select(Year, contains("topsire")) %>%
+      make_stacked_barplot(levels_order = paste0("topsire ", 10:1)) +
+      ylab("Percentage") +
+      interval_ext +
+      theme(legend.position = "bottom") + labs(title = "Top sires contribution")
+  }
 
   # 5. Compute Deltas ----
   if(!is.null(delta_intervals)) {
-    if (verbose) { cat("\n Compute Deltas") }
-    results$deltas <- compute_deltas(intervals = delta_intervals,
-                                     generation_intervals = results$gen_intervals, inbreeding = results$inbreeding)
+    if (verbose) { cat("\n >> Extracting Compute Deltas") }
+    results$deltas <- safe_extract(compute_deltas,
+                                   intervals = delta_intervals,
+                                   generation_intervals = results$gen_intervals,
+                                   inbreeding = results$inbreeding)
   }
 
-  return(results)
+  # Return results and the error_log if required
+  if (return_error_log) {
+    return(list(results = results, error_log = error_log))
+  } else {
+    return(results)
+  }
 }

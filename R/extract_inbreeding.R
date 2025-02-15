@@ -3,9 +3,22 @@
 #' This function extracts inbreeding information from text lines based on the specified language.
 #'
 #' @param lines A character vector containing the lines of text from Retriever.
-#' @param language A character string specifying the language of the text ("DUT" for Dutch or "ENG" for English).
+#' @param language A character string specifying the language of the text. Supported values are:
+#'   \itemize{
+#'     \item `"DUT"` for Dutch
+#'     \item `"ENG"` for English
+#'   }
 #'
-#' @return A data frame representing the extracted inbreeding information.
+#' @return A data frame containing extracted inbreeding and kinship information with the following columns:
+#'   \itemize{
+#'     \item `Year` -  The year of birth of animals.
+#'     \item `F_all_animals` - The average inbreeding coefficient for all individuals born in a year.
+#'     \item `f_inc.self` - The average kinship coefficient (including selfing) for all individuals born in a year.
+#'     \item `f_exc.self` - The average kinship coefficient (excluding selfing) for all individuals born in a year.
+#'     \item `f_parents` - The average kinship coefficient (excluding selfing) for animals born in a year, which later become a parent.
+#'     \item `f_sires` - The average kinship coefficient (excluding selfing) for animals born in a year, which later become a sire.
+#'     \item `f_dams` - The average kinship coefficient (excluding selfing) for animals born in a year, which later become a dam.
+#'   }
 #'
 #' @examples
 #' lines <- c("INBREEDING",
@@ -16,23 +29,27 @@
 #'            " "," "," "," ")
 #' extract_inbreeding(lines, "ENG")
 #'
+#' @seealso \code{\link{extract_text}}, \code{\link{extract_section}}
+#'
 #' @export
 
 extract_inbreeding <- function(lines, language) {
-  if (language == "DUT") {
-    start_with <- "INTEELT"
-  } else if (
-    language == "ENG") {
-    start_with <- "INBREEDING"
-  }
+  table <- get_crossref_table()
 
-  extract_section(lines = lines,
-                  start_with = start_with,
-                  ends_with = "deltaF     deltaF      Ne",
-                  skip_initial_n_lines = 6,
-                  skip_last_n_lines = 4,
-                  column_names =  c("Year", "F_all_animals",
-                                    "f_inc.self", "f_exc.self",
-                                    "f_parents", "f_sires", "f_dams")
+  extract_section(
+    lines = extract_text(
+      content_lines = lines,
+      keyword = table[table$lang == language & table$section == "inbreeding", "keyword"]
+    ),
+    column_names =  c(
+      "Year",
+      "F_all_animals",
+      "f_inc.self", "f_exc.self",
+      "f_parents",
+      "f_sires", "f_dams"),
+    fixed_col_width = c(
+      4,  # First is always Year which is 4
+      rep(8, 6) # remaining are with width provided and as many as colnames provided -1
+    )
   )
 }

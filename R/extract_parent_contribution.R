@@ -7,6 +7,8 @@
 #'
 #' @return A data frame representing the extracted parent contribution information.
 #'
+#' @seealso \code{\link{extract_text}}, \code{\link{extract_section}}
+#'
 #' @examples
 #' lines <- c("Top sires and their contribution per year",
 #'            " ", " ", " ", " ", " ",
@@ -20,30 +22,27 @@
 #' @export
 
 extract_parent_contribution <- function(lines, language) {
-  if (language == "DUT") {
-    start_with <- "Topvaders en hun aandeel per jaar"
-    ends_with  <- "INTEELT"
-  } else if (
-    language == "ENG") {
-    start_with <- "Top sires and their contribution per year"
-    ends_with  <- "INBREEDING"
-  }
+  table <- get_crossref_table()
 
-  extract_section(lines = lines,
-                  start_with = start_with,
-                  ends_with = ends_with,
-                  # force_first_grep_start = F,
-                  force_first_grep_end = T,
-                  skip_initial_n_lines = 6,
-                  skip_last_n_lines = 4,
-                  exclude_between_char = "|", # exclude content within '|' characters because some rows may have inconsistent "-" for the sire name creating issues
-                  column_names = c("Year",
-                                   "Nr_sires",
-                                   # "sire_name",  # skipped by exclude_between_chr
-                                   # "topsire_id", # skipped by exclude_between_chr
-                                   paste0(
-                                     "topsire ", c(1:10), ""
-                                   )
-                  ),
+  extract_section(
+    lines = extract_text(
+      content_lines = lines,
+      keyword = table[table$lang == language & table$section == "topcontribution", "keyword"]
+    ),
+    # exclude content within '|' characters because some rows may have inconsistent "-" for the sire name creating issues
+    exclude_between_char = "|",
+    fixed_col_width = c(
+      4,  # First is always Year which is 4 (leading spaces are removed)
+      11,
+      rep(6, 10)
+    ),
+    column_names = c("Year",
+                     "Nr_sires",
+                     # "sire_name",  # skipped by exclude_between_chr
+                     # "topsire_id", # skipped by exclude_between_chr
+                     paste0(
+                       "topsire ", c(1:10), ""
+                     )
+    )
   )
 }

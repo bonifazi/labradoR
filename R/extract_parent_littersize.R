@@ -7,6 +7,8 @@
 #'
 #' @return A data frame representing the extracted parent and litter size information.
 #'
+#' @seealso \code{\link{extract_text}}, \code{\link{extract_section}}
+#'
 #' @examples
 #' lines <- c("Number of parents and litter size per year",
 #'            " ", " ", " ", " ", " ",
@@ -20,29 +22,21 @@
 #' @export
 
 extract_parent_littersize <- function(lines, language) {
-  if (language == "DUT") {
-    start_with <- "aantal ouders en nestgrootte per jaar"
-    ends_with  <- "Worpgrootte"
-  } else if (
-    language == "ENG") {
-    start_with <- "Number of parents and litter size per year"
-    ends_with  <- "Litter Sizes"
-  }
+  table <- get_crossref_table()
 
-  extract_section(lines = lines,
-                  start_with = start_with,
-                  ends_with = ends_with,
-                  # force_first_grep_start = F,
-                  force_first_grep_end = T,
-                  skip_initial_n_lines = 6,
-                  skip_last_n_lines = 6,
-                  column_names = c("Year",
-                                   "Number_nests",
-                                   "calves_per_nest",
-                                   "number_fathers",
-                                   "nests_per_father",
-                                   "calves_per_father"
+  extract_section(
+    lines = extract_text(
+      content_lines = lines,
+      keyword = table[table$lang == language & table$section == "littersize", "keyword"]
+    ),
+    column_names = c("Year",
+                     "Number_nests",
+                     "calves_per_nest",
+                     "number_fathers",
+                     "nests_per_father",
+                     "calves_per_father"
 
-                  )
+    ),
+    fixed_col_width = c(4, rep(8, 5))
   )
 }
