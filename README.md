@@ -6,6 +6,10 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml)
+![Static
+Badge](https://img.shields.io/badge/Licence%20-%20MIT%20-%20green)
+![GitHub
+Release](https://img.shields.io/github/v/release/bonifazi/labradoR)
 
 <!-- badges: end -->
 
