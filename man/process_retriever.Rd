@@ -2,39 +2,52 @@
 % Please edit documentation in R/process_retriever.R
 \name{process_retriever}
 \alias{process_retriever}
-\title{Process Retriever output log file}
+\title{Process Retriever Output Log File}
 \usage{
 process_retriever(
   file_name,
   language,
-  verbose = F,
+  verbose = T,
   xinterval = NULL,
-  delta_intervals = NULL
+  delta_intervals = NULL,
+  return_error_log = FALSE
 )
 }
 \arguments{
 \item{file_name}{A character string with the full path of the Retriever log file.}
 
-\item{language}{A character string specifying the language of the log file ("DUT" for Dutch or "ENG" for English).}
+\item{language}{A character string specifying the language of the log file. Valid options are "DUT" (Dutch) or "ENG" (English).}
 
-\item{verbose}{Logical. If \code{TRUE}, prints progress messages. Default is \code{FALSE}.}
+\item{verbose}{A logical value. If \code{TRUE}, prints progress messages. Default is \code{TRUE}.}
 
-\item{xinterval}{Numeric. A numeric vector of length 2 specifying the x-axis limits for plots. It can be used to focus on specific years intervals. Default is \code{NULL}, i.e., plots show all years.}
+\item{xinterval}{A numeric vector of length 2 specifying the x-axis limits for plots. It can be used to focus on specific year intervals. Default is \code{NULL}, meaning plots will show all available years.}
 
-\item{delta_intervals}{Numeric. A numeric vector specifying the intervals for which to compute the annual and generational deltas for inbreeding and kinship. Default is \code{NULL}.}
+\item{delta_intervals}{A numeric vector specifying the intervals (in years) for which to compute the annual and generational deltas for inbreeding and kinship. Default is \code{NULL}, meaning deltas will not be computed.}
+
+\item{return_error_log}{A logical value. If \code{TRUE}, returns a list containing the results as well as a log of any errors or warnings encountered during processing. Default is \code{FALSE}.}
 }
 \value{
-A list containing processed data (as data frames) and plots for population size, inbreeding, generation intervals, mean age of parents, pedigree completeness, litter size, and top sires' contribution.
+A list containing processed data (as data frames) and plots for varius metrics, including:
+\itemize{
+\item Population size
+\item Inbreeding
+\item Generation intervals
+\item Mean age of parents (fathers and mothers)
+\item Pedigree completeness
+\item Litter size
+\item Top sires' contribution
+If \code{return_error_log} is \code{TRUE}, the returned list will also include an error log.
+}
 }
 \description{
-This function processes a Retriever output log file, extracting various metrics and generating plots based on the content.
+This function processes a Retriever output log file, extracting various population metrics and generating corresponding plots based on the content.
 }
 \examples{
 # Process a Retriever log file in English
 # results <- process_retriever("path/to/retriever.log", "ENG")
 
 # Access processed data and plots
-# str(results, max.level = 1, give.attr = F) # look into the extracted data frames and plots
+# str(results, max.level = 1, give.attr = FALSE) # look into the extracted data frames and plots
 # results$pop_size # Population size data
 # results$pop_size_plot # Population size plot
 

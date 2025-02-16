@@ -2,29 +2,34 @@
 % Please edit documentation in R/extract_gen_interval.R
 \name{extract_gen_interval}
 \alias{extract_gen_interval}
-\title{Extract generation interval information from text lines of Retriever output.}
+\title{Extract Generation Interval Information from Retriever Output}
 \usage{
 extract_gen_interval(lines, language)
 }
 \arguments{
-\item{lines}{A character vector containing the lines of text from Retriever.}
+\item{lines}{A character vector containing the lines of text from Retriever output.}
 
-\item{language}{A character string specifying the language of the text ("DUT" for Dutch or "ENG" for English).}
+\item{language}{A character string specifying the language of the text. Supported values are:
+\itemize{
+\item \code{"DUT"} for Dutch
+\item \code{"ENG"} for English
+}}
 }
 \value{
-A data frame representing the extracted generation interval information.
+A data frame containing the extracted generation interval information with the following columns:
+\itemize{
+\item \code{Year} - The birth year of the offspring.
+\item \code{mean_age_sires} - The average age of sires at the time of birth of their offspring.
+\item \code{mean_age_dams} - The average age of dams at the time of birth of their offspring.
+\item \code{mean_age_both_parents} - The combined average age of both parents at the time of birth of offspring.
+}
+The generation interval is calculated as the mean parental age at the time of birth of offspring,
+based on the difference in birth dates between parents and offspring, expressed in years.
 }
 \description{
-This function extracts generation interval information from text lines based on the specified language.
+This function extracts generation interval information from text lines of Retriever output
+based on the specified language.
 }
-\examples{
-lines <- c("GENERATION INTERVAL",
-           " ", " "," "," ",
-           "2000 5 6 5.5",
-           "2001 5.5 6.5 6",
-           "2002 6 7 6.5",
-           " ", " "," "," ",
-           "PEDIGREE COMPLETENESS")
-extract_gen_interval(lines, "ENG")
-
+\seealso{
+\code{\link{extract_section}}, \code{\link{extract_text}}
 }

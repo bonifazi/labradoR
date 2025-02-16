@@ -17,13 +17,15 @@ compute_deltas(intervals, generation_intervals, inbreeding, round = 2)
 }
 \value{
 A data frame with the computed deltas for each interval pair. The data frame includes:
-\item{interval}{The interval pair in the format "start-end".}
-\item{annual_delta_F}{The annual delta for all animals' inbreeding coefficient, expressed as a percentage.}
-\item{annual_delta_f}{The annual delta for the inbreeding coefficient excluding selfing, expressed as a percentage.}
-\item{L}{The average age of both parents within the interval, rounded to specified decimal places.}
-\item{generation_delta_F}{The generational delta for all animals' inbreeding coefficient, expressed as a percentage.}
-\item{generation_delta_f}{The generational delta for the inbreeding coefficient excluding selfing, expressed as a percentage.}
-Values are rounded to the \code{round} coefficient (default = 2).
+\itemize{
+\item \code{intervals} - The interval pair in the format \code{"start-end"}.
+\item \code{annual_delta_F} - The annual delta for all animals' inbreeding coefficient, expressed as a percentage.
+\item \code{annual_delta_f} - The annual delta for the inbreeding coefficient excluding selfing, expressed as a percentage.
+\item \code{average_L} - The average age of both parents within the interval, rounded to specified decimal places.
+\item \code{generation_delta_F} - The generational delta for all animals' inbreeding coefficient, expressed as a percentage.
+\item \code{generation_delta_f} - The generational delta for the inbreeding coefficient excluding selfing, expressed as a percentage.
+}
+Values are rounded to the \code{round} parameter (default = 2).
 }
 \description{
 This function computes the annual and generational deltas for inbreeding and kinship coefficients over specified intervals. The computation for annual deltas follows the method outlined by Pérez-Enciso (1995).
@@ -33,4 +35,8 @@ intervals <- c(2000, 2010, 2020)
 generation_intervals <- data.frame(Year = 2000:2020, mean_age_both_parents = runif(21, 2, 4))
 inbreeding <- data.frame(Year = 2000:2020, F_all_animals = runif(21, 0, 0.1), f_exc.self = runif(21, 0, 0.1))
 compute_deltas(intervals, generation_intervals, inbreeding, 2)
+
+}
+\seealso{
+\code{\link{filter}}, \code{\link{mutate}}, \code{\link{summarise}}
 }

@@ -18,13 +18,21 @@ A data frame representing the extracted parent contribution information.
 This function extracts parent contribution information from text lines based on the specified language.
 }
 \examples{
-lines <- c("Top sires and their contribution per year",
-           " ", " ", " ", " ", " ",
-           "2000 5 0.2 0.15 0.1 0.08 0.07 0.05 0.04 0.03 0.02 0.01",
-           "2001 5 0.22 0.17 0.12 0.1 0.08 0.06 0.05 0.03 0.02 0.01",
-           "2002 6 0.25 0.2 0.15 0.12 0.1 0.08 0.07 0.05 0.03 0.02",
-           " ", " ", " ",
-           "INBREEDING")
+lines <- c(
+  "Top sires and their contribution per year",
+  "_______________________________________________________________________________________________________________________",
+  "|                  the Topsire             |                   contribution of top 10 sires (\%)         |",
+  "  year #Sires   | name                    id               |    1     2     3     4     5     6     7     8     9    10 |",
+  "_______________________________________________________________________________________________________________________",
+  "2000       5    | TopSireA                12345            |  20    15    12    10     9     8     7     6     7     6 |",
+  "2001       5    | TopSireB                23456            |  22    17    14    10     9     8     7     6     4     3 |",
+  "2002       6    | TopSireC                34567            |  25    20    15    12    10     8     5     3     2     2 |",
+     "________________________________________________________"
+)
+
 extract_parent_contribution(lines, "ENG")
 
+}
+\seealso{
+\code{\link{extract_text}}, \code{\link{extract_section}}
 }

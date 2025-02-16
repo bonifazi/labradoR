@@ -18,13 +18,21 @@ A data frame representing the extracted parent and litter size information.
 This function extracts parent and litter size information from text lines based on the specified language.
 }
 \examples{
-lines <- c("Number of parents and litter size per year",
-           " ", " ", " ", " ", " ",
-           "2000 100 2 50 2 1",
-           "2001 110 2.5 55 2.2 1.1",
-           "2002 120 3 60 2.5 1.2",
-           " ", " ", " ", " ", " ",
-           "Litter Sizes")
+lines <- c(
+  "Number of parents and litter size per year",
+  "________________________________________________________",
+  "Y of   number   calves/   number   litter   calves/ ",
+  "birth   litter   litter   fathers  /father   father ",
+  "________________________________________________________",
+  "2000       100      2.0       50      2.0      1.0",
+  "2001       110      2.5       55      2.2      1.1",
+  "2002       120      3.0       60      2.5      1.2",
+  "________________________________________________________"
+)
+
 extract_parent_littersize(lines, "ENG")
 
+}
+\seealso{
+\code{\link{extract_text}}, \code{\link{extract_section}}
 }

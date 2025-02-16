@@ -8,15 +8,21 @@
 #' @param round An integer (default = 2) specifying the number of decimal places to which the results should be rounded.
 #'
 #' @return A data frame with the computed deltas for each interval pair. The data frame includes:
-#' \item{interval}{The interval pair in the format "start-end".}
-#' \item{annual_delta_F}{The annual delta for all animals' inbreeding coefficient, expressed as a percentage.}
-#' \item{annual_delta_f}{The annual delta for the inbreeding coefficient excluding selfing, expressed as a percentage.}
-#' \item{L}{The average age of both parents within the interval, rounded to specified decimal places.}
-#' \item{generation_delta_F}{The generational delta for all animals' inbreeding coefficient, expressed as a percentage.}
-#' \item{generation_delta_f}{The generational delta for the inbreeding coefficient excluding selfing, expressed as a percentage.}
-#' Values are rounded to the `round` coefficient (default = 2).
+#'   \itemize{
+#'     \item `intervals` - The interval pair in the format `"start-end"`.
+#'     \item `annual_delta_F` - The annual delta for all animals' inbreeding coefficient, expressed as a percentage.
+#'     \item `annual_delta_f` - The annual delta for the inbreeding coefficient excluding selfing, expressed as a percentage.
+#'     \item `average_L` - The average age of both parents within the interval, rounded to specified decimal places.
+#'     \item `generation_delta_F` - The generational delta for all animals' inbreeding coefficient, expressed as a percentage.
+#'     \item `generation_delta_f` - The generational delta for the inbreeding coefficient excluding selfing, expressed as a percentage.
+#'   }
+#'   Values are rounded to the `round` parameter (default = 2).
+#'
+#' @seealso \code{\link{filter}}, \code{\link{mutate}}, \code{\link{summarise}}
+#'
 #' @export
 #'
+#' @importFrom dplyr filter mutate summarise
 #' @importFrom dplyr %>%
 #'
 #' @examples
@@ -24,7 +30,7 @@
 #' generation_intervals <- data.frame(Year = 2000:2020, mean_age_both_parents = runif(21, 2, 4))
 #' inbreeding <- data.frame(Year = 2000:2020, F_all_animals = runif(21, 0, 0.1), f_exc.self = runif(21, 0, 0.1))
 #' compute_deltas(intervals, generation_intervals, inbreeding, 2)
-
+#'
 compute_deltas <- function(intervals, generation_intervals, inbreeding, round = 2) {
   deltas_list <- list() # create an empty list to store results
   if(!is.numeric(intervals) ) {

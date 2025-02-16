@@ -7,43 +7,47 @@
 #'
 #' @return A data frame representing the extracted parent contribution information.
 #'
+#' @seealso \code{\link{extract_text}}, \code{\link{extract_section}}
+#'
 #' @examples
-#' lines <- c("Top sires and their contribution per year",
-#'            " ", " ", " ", " ", " ",
-#'            "2000 5 0.2 0.15 0.1 0.08 0.07 0.05 0.04 0.03 0.02 0.01",
-#'            "2001 5 0.22 0.17 0.12 0.1 0.08 0.06 0.05 0.03 0.02 0.01",
-#'            "2002 6 0.25 0.2 0.15 0.12 0.1 0.08 0.07 0.05 0.03 0.02",
-#'            " ", " ", " ",
-#'            "INBREEDING")
+#' lines <- c(
+#'   "Top sires and their contribution per year",
+#'   "_______________________________________________________________________________________________________________________",
+#'   "|                  the Topsire             |                   contribution of top 10 sires (%)         |",
+#'   "  year #Sires   | name                    id               |    1     2     3     4     5     6     7     8     9    10 |",
+#'   "_______________________________________________________________________________________________________________________",
+#'   "2000       5    | TopSireA                12345            |  20    15    12    10     9     8     7     6     7     6 |",
+#'   "2001       5    | TopSireB                23456            |  22    17    14    10     9     8     7     6     4     3 |",
+#'   "2002       6    | TopSireC                34567            |  25    20    15    12    10     8     5     3     2     2 |",
+#'      "________________________________________________________"
+#' )
+#'
 #' extract_parent_contribution(lines, "ENG")
 #'
 #' @export
 
 extract_parent_contribution <- function(lines, language) {
-  if (language == "DUT") {
-    start_with <- "Topvaders en hun aandeel per jaar"
-    ends_with  <- "INTEELT"
-  } else if (
-    language == "ENG") {
-    start_with <- "Top sires and their contribution per year"
-    ends_with  <- "INBREEDING"
-  }
+  table <- get_crossref_table()
 
-  extract_section(lines = lines,
-                  start_with = start_with,
-                  ends_with = ends_with,
-                  # force_first_grep_start = F,
-                  force_first_grep_end = T,
-                  skip_initial_n_lines = 6,
-                  skip_last_n_lines = 4,
-                  exclude_between_char = "|", # exclude content within '|' characters because some rows may have inconsistent "-" for the sire name creating issues
-                  column_names = c("Year",
-                                   "Nr_sires",
-                                   # "sire_name",  # skipped by exclude_between_chr
-                                   # "topsire_id", # skipped by exclude_between_chr
-                                   paste0(
-                                     "topsire ", c(1:10), ""
-                                   )
-                  ),
+  extract_section(
+    lines = extract_text(
+      content_lines = lines,
+      keyword = table[table$lang == language & table$section == "topcontribution", "keyword"]
+    ),
+    # exclude content within '|' characters because some rows may have inconsistent "-" for the sire name creating issues
+    exclude_between_char = "|",
+    fixed_col_width = c(
+      4,  # First is always Year which is 4 (leading spaces are removed)
+      11,
+      rep(6, 10)
+    ),
+    column_names = c("Year",
+                     "Nr_sires",
+                     # "sire_name",  # skipped by exclude_between_chr
+                     # "topsire_id", # skipped by exclude_between_chr
+                     paste0(
+                       "topsire ", c(1:10), ""
+                     )
+    )
   )
 }

@@ -7,40 +7,43 @@
 #'
 #' @return A data frame representing the extracted pedigree completeness information.
 #'
+#' @seealso \code{\link{extract_text}}, \code{\link{extract_section}}
+#'
 #' @examples
-#' lines <- c("PEDIGREE COMPLETENESS",
-#'            " ", " ", " ", " ", " ",
-#'            "2000 2.5 80 65 50 40 30",
-#'            "2001 2.7 85 70 55 45 35",
-#'            "2002 3.0 90 75 60 50 40",
-#'            " ", " ",
-#'            "Top sires and their contribution per year")
+#' lines <- c(
+#' "PEDIGREE COMPLETENESS",
+#' "________________________________________________________________________",
+#' "Y of   average      | percentage animals with # of generations ",
+#' "birth  generation   | in pedigree completely known",
+#' "equivalent   |    0       1       2       3       4    5 or more  ",
+#' "________________________________________________________________________",
+#' "2000       2.5    20.0    15.0    25.0    20.0    10.0    10.0",
+#' "2001       2.7    18.0    17.0    24.0    21.0    10.0    10.0",
+#' "2002       3.0    15.0    20.0    22.0    23.0    10.0    10.0",
+#' "________________________________________________________________________"
+#' )
+#'
 #' extract_pedigree_completeness(lines, "ENG")
 #'
 #' @export
 
 extract_pedigree_completeness <- function(lines, language) {
-  if (language == "DUT") {
-    start_with <- "COMPLEETHEID stamboom"
-    ends_with  <- "Topvaders en hun aandeel per jaar"
-  } else if (
-    language == "ENG") {
-    start_with <- "PEDIGREE COMPLETENESS"
-    ends_with  <- "Top sires and their contribution per year"
-  }
+  table <- get_crossref_table()
 
-  extract_section(lines = lines,
-                  start_with = start_with,
-                  ends_with = ends_with,
-                  skip_initial_n_lines = 6,
-                  skip_last_n_lines = 3,
-                  column_names = c("Year",
-                                   "average_generation_equivalent",
-                                   "perc_of_animals_with_1_generations_in_pedigree_completely_known",
-                                   "perc_of_animals_with_2_generations_in_pedigree_completely_known",
-                                   "perc_of_animals_with_3_generations_in_pedigree_completely_known",
-                                   "perc_of_animals_with_4_generations_in_pedigree_completely_known",
-                                   "perc_of_animals_with_>=5_generations_in_pedigree_completely_known"
-                  )
+  extract_section(
+    lines = extract_text(
+      content_lines = lines,
+      keyword = table[table$lang == language & table$section == "pedcomplet", "keyword"]
+    ),
+    column_names = c("Year",
+                     "average_generation_equivalent",
+                     "%_animals_with_0_generations_in_pedigree_completely_known",
+                     "%_animals_with_1_generations_in_pedigree_completely_known",
+                     "%_animals_with_2_generations_in_pedigree_completely_known",
+                     "%_animals_with_3_generations_in_pedigree_completely_known",
+                     "%_animals_with_4_generations_in_pedigree_completely_known",
+                     "%_animals_with_5+_generations_in_pedigree_completely_known"
+    ),
+    fixed_col_width = c(4, 14, rep(8, 6))
   )
 }

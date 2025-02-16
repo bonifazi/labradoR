@@ -2,64 +2,53 @@
 % Please edit documentation in R/extract_section.R
 \name{extract_section}
 \alias{extract_section}
-\title{Extract a section from a character vector}
+\title{Extract and Process a Section of Data}
 \usage{
 extract_section(
   lines,
-  start_with,
-  ends_with,
-  force_first_grep_start = F,
-  force_first_grep_end = F,
-  skip_initial_n_lines,
-  skip_last_n_lines,
+  exclude_between_char = NA,
+  trim_asterisks = F,
+  skipcols = NA,
   column_names = NA,
   fill_colnames = NA,
-  skipcols = NA,
-  exclude_between_char = NA
+  fixed_col_width = NA
 )
 }
 \arguments{
-\item{lines}{A character vector containing the lines of text to use as input.}
+\item{lines}{A character vector containing lines of text to be processed.}
 
-\item{start_with}{A character string indicating the phrase marking the start of the section.}
+\item{exclude_between_char}{A character indicating a delimiter (e.g., \code{"_"}) for removing text enclosed between consecutive occurrences of the character.}
 
-\item{ends_with}{A character string indicating the phrase marking the end of the section.}
+\item{trim_asterisks}{Logical (default \code{FALSE}). If \code{TRUE}, removes all asterisks (\code{*}) from the text.}
 
-\item{force_first_grep_start}{Logical (default = FALSE). If TRUE, only the first match of \code{start_with} will be considered.}
+\item{skipcols}{A numeric vector specifying column indices to be removed from the extracted data.}
 
-\item{force_first_grep_end}{Logical (default = FALSE). If TRUE, only the first match of \code{ends_with} after the start match will be considered.}
+\item{column_names}{A character vector of column names. If provided, it must match the number of extracted columns.}
 
-\item{skip_initial_n_lines}{Numeric. The number of lines to skip after the start match.}
+\item{fill_colnames}{A special keyword (e.g., \code{"parents_age"}) to automatically generate column names.}
 
-\item{skip_last_n_lines}{Numeric. The number of lines to skip before the end match.}
-
-\item{column_names}{Optional. A character vector specifying column names for the resulting data frame.}
-
-\item{fill_colnames}{Optional. A character string specifying how to fill column names in specific situations (e.g., "parents_age").}
-
-\item{skipcols}{Optional. A numeric vector specifying column indices to skip.}
-
-\item{exclude_between_char}{Optional. A character string indicating characters between which content should be excluded.}
+\item{fixed_col_width}{A numeric vector specifying the fixed column widths for parsing the data. If \code{NA}, whitespace-based splitting is used instead.}
 }
 \value{
-A data frame representing the extracted section from the input.
+A data frame with processed numeric values and appropriately assigned column names.
 }
 \description{
-This function extracts a section from a character vector based on specified start and end phrases, skipping initial and final lines, and optionally excluding content between specified characters.
+This function extracts tabular data from a list of lines, processes column names,
+removes unwanted content, and converts extracted data into a numeric data frame.
+}
+\details{
+\itemize{
+\item The function automatically splits lines into columns based on whitespace.
+\item All extracted values are converted to numeric.
+\item If \code{exclude_between_char} is provided, content between matching symbols is removed.
+\item If \code{trim_asterisks = TRUE}, all \code{*} symbols are stripped.
+\item If \code{fill_colnames = "parents_age"}, the function auto-generates column names with \code{Year} followed by \code{Age_1}, \code{Age_2}, etc.
+\item If \code{column_names} is provided, its length must match the number of extracted columns, otherwise an error is thrown.
+\item If \code{fixed_col_width} do not count leading spaces for first col which hare removed.
+}
 }
 \examples{
-lines <- c("GENERATION INTERVAL  ",
-           " some text to skip", "some text to skip ",
-           "",  "", "", # empty lines are skipped automatically
-           "2000 5 6 5.5",
-           "2001 5.5 6.5 6",
-           "2002 6 7 6.5",
-           "",  "", "", # empty lines are skipped automatically
-           "some text to skip ", "some text to skip ",
-           "PEDIGREE COMPLETENESS    ")
-lines
-extract_section(lines, start_with = "GENERATION INTERVAL",
-           ends_with = "PEDIGREE COMPLETENESS", skip_initial_n_lines = 3,
-           skip_last_n_lines = 3)
+lines <- c("2020 25 30 35", "2021 26 31 36")
+extract_section(lines, column_names = c("Year", "Age_A", "Age_B", "Age_C"))
 
 }

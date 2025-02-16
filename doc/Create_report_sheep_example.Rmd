@@ -28,6 +28,7 @@ Given input file is `r params$input_file`, with `r params$language` as language.
 ```{r}
 kable(sim_results$pop_size)
 print(sim_results$pop_size_plot)
+print(sim_results$sex_ratio_plot)
 ```
 
 ## Inbreeding
