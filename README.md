@@ -67,15 +67,18 @@ Note that sub-populations are not supported yet.
 
 The current `labradoR` version `1.1.0` has been tested and used for the
 output of `Retriver` version compiled on `08-02-2025`.  
-Older versions may support older output of `Retriever`, and are kept for
-legacy. You can install an older version of `labradoR` using, for
-example:
+Older versions are compatible with older `Retriever` output, and are
+kept for legacy. You can install an older version of `labradoR` using,
+for example:
 
-    install_github("bonifazi/labrador@v1.0.0")
+``` r
+# install.packages("devtools")
+devtools::install_github("bonifazi/labrador@v1.0.0")
+```
 
-Legacy:
+Legacy list:
 
-- `labradoR` version `1.0.0`has been tested and used with
+- `labradoR` version `1.0.0` has been tested and used with
   `Retriever v7`.
 
 ## Example output
