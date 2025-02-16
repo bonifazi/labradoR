@@ -23,7 +23,7 @@
 #' @export
 #'
 #' @importFrom dplyr filter mutate summarise
-#' @importFrom magrittr %>%
+#' @importFrom dplyr %>%
 #'
 #' @examples
 #' intervals <- c(2000, 2010, 2020)

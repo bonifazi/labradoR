@@ -18,13 +18,18 @@ A data frame representing the extracted population size information.
 This function extracts population size information from text lines based on the specified language.
 }
 \examples{
-lines <- c("POPULATIONSIZE: number of calves born per year",
-           " ", " "," "," ",
-           "2000 10 20 15 5 30 50",
-           "2001 15 25 20 10 35 60",
-           "2002 20 30 25 15 40 70",
-            " "," "," ",
-           "total number of animals in pedigree")
+lines <- c(
+  "POPULATIONSIZE: number of calves born per year",
+  "__________________________________________________________________",
+  "geb.        bulls      |    cows       |      total     | sex ratio",
+  "jaar     unused fathers| unused mothers| unused parents | \% male calves",
+  "__________________________________________________________________",
+  "2000  10  20   15  5  30  50  40.0",
+  "2001  15  25   20  10  35  60  48.0",
+  "2002  20  30   25  15  40  70  52.0" ,
+  "__________________________________________________________________"
+)
+
 extract_pop_size(lines, "ENG")
 
 }

@@ -24,15 +24,20 @@ A data frame containing the extracted mean age of parents information with colum
 This function extracts the mean age of parents information from text lines based on the specified language.
 }
 \examples{
-lines <- c("AGE fathers",
-           " ", " "," "," ",
-           "2000 30 25",
-           "2001 32 26",
-           "2002 35 28",
-           " ", " "," "," ",
-           "AGE mothers")
+lines <- c(
+  "AGE fathers",
+  "    ",
+  "________________________________________________________",
+  " born                    age",
+  " year         1       2       3       4       5       6       7       8       9      10",
+  "________________________________________________________",
+  "2000        10      12      8       10      15      7       10      8       10      10",
+  "2001        9       11      10      12      14      9       10      8       9       8",
+  "2002        11      10      9       13      12      8       11      7       10      9",
+  "         ",
+  "________________________________________________________"
+)
 extract_mean_age_parents(lines, "ENG", parent = "fathers")
-
 
 }
 \seealso{

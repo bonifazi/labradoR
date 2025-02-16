@@ -29,7 +29,8 @@ consecutive underscores, treating them as delimiters.
 }
 }
 \examples{
-content <- c("Some text", "Keyword", "______", "Extract this text", "______", "More text")
+
+content <- c("Some text", "Keyword", "______", "col1_title   col2_title  col3_title", "______", "Extract this text", "some other text to extract", "______", "More text")
 extract_text(content, "Keyword")
 
 }

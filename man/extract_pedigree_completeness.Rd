@@ -18,13 +18,19 @@ A data frame representing the extracted pedigree completeness information.
 This function extracts pedigree completeness information from text lines based on the specified language.
 }
 \examples{
-lines <- c("PEDIGREE COMPLETENESS",
-           " ", " ", " ", " ", " ",
-           "2000 2.5 80 65 50 40 30",
-           "2001 2.7 85 70 55 45 35",
-           "2002 3.0 90 75 60 50 40",
-           " ", " ",
-           "Top sires and their contribution per year")
+lines <- c(
+"PEDIGREE COMPLETENESS",
+"________________________________________________________________________",
+"Y of   average      | percentage animals with # of generations ",
+"birth  generation   | in pedigree completely known",
+"equivalent   |    0       1       2       3       4    5 or more  ",
+"________________________________________________________________________",
+"2000       2.5    20.0    15.0    25.0    20.0    10.0    10.0",
+"2001       2.7    18.0    17.0    24.0    21.0    10.0    10.0",
+"2002       3.0    15.0    20.0    22.0    23.0    10.0    10.0",
+"________________________________________________________________________"
+)
+
 extract_pedigree_completeness(lines, "ENG")
 
 }
