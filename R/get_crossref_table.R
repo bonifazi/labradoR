@@ -25,7 +25,9 @@ get_crossref_table <- function() {
         "ENG", 	"pedcomplet",  "PEDIGREE COMPLETENESS",
         "DUT",  "pedcomplet",  "COMPLEETHEID stamboom",
         "ENG", 	"littersize",  "Number of parents and litter size per year",
-        "DUT",  "littersize",  "aantal ouders en nestgrootte per jaar",
+        # "DUT",  "littersize",  "aantal ouders en nestgrootte per jaar",
+        # "DUT",  "littersize",  "aantal ouders en worpgrootte per jaar",
+        "DUT",  "littersize",  "aantal ouders en ",
         "ENG", 	"topcontribution", "Top sires and their contribution per year",
         "DUT",  "topcontribution", "Topvaders en hun aandeel per jaar"
       ),
