@@ -1,5 +1,13 @@
 # labradoR
 
+## Version 1.1.1
+
+### Bug fixes
+
+-   simplified keyword for litter size when `language=DUT`
+
+-   fixed maintainer field in DESCRIPTION
+
 ## Version 1.1.0
 
 ### Enhancements

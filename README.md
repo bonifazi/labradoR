@@ -5,11 +5,11 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml)
-![Static
-Badge](https://img.shields.io/badge/Licence%20-%20MIT%20-%20green)
 ![GitHub
 Release](https://img.shields.io/github/v/release/bonifazi/labradoR)
+![GitHub
+License](https://img.shields.io/github/license/bonifazi/labradoR)
+[![R-CMD-check](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
 
@@ -61,9 +61,25 @@ for English and DUT for Dutch).
 Note: since the logic of `labradoR` is that of “fetching” lines from
 `Retriever`’s output, if anything changes in the format of the `.out`
 file, then `labradoR`’s associated code will need to be adapted
-accordingly. Currently, `labradoR` has been tested and used with
-`Retriever v7` (newer versions and sub-populations are not supported
-yet).
+accordingly.
+
+Note that sub-populations are not supported yet.
+
+The current `labradoR` version `1.1.0` has been tested and used for the
+output of `Retriver` version compiled on `08-02-2025`.  
+Older versions are compatible with older `Retriever` output, and are
+kept for legacy. You can install an older version of `labradoR` using,
+for example:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("bonifazi/labrador@v1.0.0")
+```
+
+Legacy list:
+
+- `labradoR` version `1.0.0` has been tested and used with
+  `Retriever v7`.
 
 ## Example output
 
@@ -86,7 +102,7 @@ follows:
     your work:
 
     - Bonifazi, R. (2025). labradoR: An R package for handling and
-      post-processing Retriever output. Version 1.0.0. Retrieved from
+      post-processing Retriever output. Version 1.1.0. Retrieved from
       <https://github.com/bonifazi/labradoR>.
 
 2.  **Citing the Associated Paper**

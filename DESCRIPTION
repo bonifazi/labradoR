@@ -1,9 +1,10 @@
 Package: labradoR
 Title: Read and Process Retriever's Output
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: 
     person("Renzo", "Bonifazi", , "renzo.bonifazi@outlook.it", role = c("aut", "cre"),
            comment = c(ORCID = "https://orcid.org/0000-0002-1794-4708"))
+Maintainer: "Renzo Bonifazi" <renzo.bonifazi@outlook.it>
 Description: Extracts dataframes and generate plots from the log output file of the Retriever software.
 License: MIT + file LICENSE
 Encoding: UTF-8
