@@ -10,6 +10,8 @@ make_stacked_lineplot(data, dots = F, levels_order = NULL)
 \item{data}{A data frame containing the data to be plotted. First column must be named 'Year'.}
 
 \item{dots}{A logical (default = F) to turn on/off plotting dots following the stacked area lines}
+
+\item{levels_order}{A vector specifying the order of levels for stacking.}
 }
 \value{
 A ggplot object representing the stacked area plot.

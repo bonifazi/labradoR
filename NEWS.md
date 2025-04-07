@@ -7,7 +7,7 @@
 - fixed order of labels and label name for years>10 in plots mean_age_fathers and mean_age_mothers
 
 ### Enhancements
-- added options for `interval` and `compute_deltas` in README and example sheep dataset document
+- added options for `xinterval` and `delta_intervals` in README and example sheep dataset document
 
 ## Version 1.1.1
 
