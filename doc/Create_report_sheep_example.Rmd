@@ -9,12 +9,15 @@ output: github_document
 
 ```{r setup, include=FALSE}
 # Load necessary libraries
-library(ggplot2)
 library(knitr)
+library(labradoR)
+options(warn = -1) # suppress warning messages
 ```
 
+Example of running labradoR (the `xinterval` and `delta_intervals` arguments are optional arguments).
+
 ```{r process retriever file with labradoR}
-sim_results <- labradoR::process_retriever(params$input_file, language = params$language)
+sim_results <- labradoR::process_retriever(params$input_file, language = params$language, xinterval = c(2006, 2020), delta_intervals = c(2006, 2008, 2010, 2014, 2020))
 ```
 
 # Description
@@ -28,6 +31,12 @@ Given input file is `r params$input_file`, with `r params$language` as language.
 ```{r}
 kable(sim_results$pop_size)
 print(sim_results$pop_size_plot)
+print(sim_results$sex_ratio_plot)
+```
+
+## Sex ratio
+
+```{r}
 print(sim_results$sex_ratio_plot)
 ```
 
@@ -84,4 +93,12 @@ print(sim_results$littersize_plot)
 ```{r}
 kable(sim_results$topsires)
 print(sim_results$topsires_plot)
+```
+
+## Annual and generational rates
+
+F = inbreeding, f = kinship, L = generation interval.
+
+```{r}
+kable(sim_results$deltas)
 ```
