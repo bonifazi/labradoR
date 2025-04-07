@@ -4,6 +4,8 @@
 #'
 #' @param data A data frame containing the data to be plotted. First column must be named 'Year'.
 #' @param dots A logical (default = F) to turn on/off plotting dots following the stacked area lines
+#' @param levels_order A vector specifying the order of levels for stacking.
+#'
 #'
 #' @return A ggplot object representing the stacked area plot.
 #'
@@ -19,11 +21,12 @@
 #' data <- data.frame(Year = c(2000, 2001, 2002),
 #'                    Group1 = c(10, 20, 15),
 #'                    Group2 = c(5, 10, 8))
-#' make_stacked_lineplot(data)
+#' levels_order <- c("Group1", "Group2")
+#' make_stacked_lineplot(data, levels_order = levels_order)
 #'
 #' @export
 
-make_stacked_lineplot <- function(data, dots = F) {
+make_stacked_lineplot <- function(data, dots = F, levels_order = NULL) {
   if(dots) {
     plot_dots <- geom_point(position = "stack") # size = 2
   } else plot_dots <- NULL
@@ -31,7 +34,9 @@ make_stacked_lineplot <- function(data, dots = F) {
     pivot_longer(cols = -Year,
                  names_to = "group",
                  values_to = "value") %>%
-    ggplot(aes(x = Year, y = value, fill = group)) +
+    ggplot(aes(x = Year, y = value,
+               fill = factor(group, levels = levels_order))
+           ) +
     geom_area(color = "black")+
     plot_dots +
     scale_x_continuous(

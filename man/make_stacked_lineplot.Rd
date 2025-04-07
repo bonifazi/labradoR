@@ -4,12 +4,14 @@
 \alias{make_stacked_lineplot}
 \title{Create a stacked area plot}
 \usage{
-make_stacked_lineplot(data, dots = F)
+make_stacked_lineplot(data, dots = F, levels_order = NULL)
 }
 \arguments{
 \item{data}{A data frame containing the data to be plotted. First column must be named 'Year'.}
 
 \item{dots}{A logical (default = F) to turn on/off plotting dots following the stacked area lines}
+
+\item{levels_order}{A vector specifying the order of levels for stacking.}
 }
 \value{
 A ggplot object representing the stacked area plot.
@@ -21,6 +23,7 @@ This function generates a stacked area plot based on the provided data.
 data <- data.frame(Year = c(2000, 2001, 2002),
                    Group1 = c(10, 20, 15),
                    Group2 = c(5, 10, 8))
-make_stacked_lineplot(data)
+levels_order <- c("Group1", "Group2")
+make_stacked_lineplot(data, levels_order = levels_order)
 
 }

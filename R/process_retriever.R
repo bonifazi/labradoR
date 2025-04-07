@@ -102,9 +102,9 @@ process_retriever <- function(file_name, language, verbose = T, xinterval = NULL
 
   if(!is.null(results$mean_age_fathers)) {
     results$mean_age_fathers_plot <- results$mean_age_fathers %>%
-      mutate("Age_10+" = rowSums(select(., starts_with("Age_"))[, -c(1:10)])) %>% # group all 10+ as single col
+      mutate("Age_>10" = rowSums(select(., starts_with("Age_"))[, -c(1:10)])) %>% # group all 10+ as single col
       select(any_of(c("Year", paste0("Age_", c(1:10)), "Age_>10"))) %>%
-      make_stacked_lineplot() +
+      make_stacked_lineplot(levels_order = paste0("Age_", c(">10", 10:1))) +
       labs(title = "Mean age of fathers") +
       interval
   }
@@ -115,9 +115,9 @@ process_retriever <- function(file_name, language, verbose = T, xinterval = NULL
 
   if(!is.null(results$mean_age_mothers)){
     results$mean_age_mothers_plot <- results$mean_age_mothers %>%
-      mutate("Age_10+" = rowSums(select(., starts_with("Age_"))[, -c(1:10)])) %>% # group all 10+ as single col
+      mutate("Age_>10" = rowSums(select(., starts_with("Age_"))[, -c(1:10)])) %>% # group all 10+ as single col
       select(any_of(c("Year", paste0("Age_", c(1:10)), "Age_>10"))) %>%
-      make_stacked_lineplot() +
+      make_stacked_lineplot(levels_order = paste0("Age_", c(">10", 10:1))) +
       labs(title = "Mean age of mothers") +
       interval
   }

@@ -1,20 +1,61 @@
 Simulation Results Report
 ================
-2025-02-15
+2025-04-05
+
+Example of running labradoR (the `xinterval` and `delta_intervals`
+arguments are optional arguments).
 
 ``` r
-sim_results <- labradoR::process_retriever(params$input_file, language = params$language)
+sim_results <- labradoR::process_retriever(params$input_file, language = params$language, xinterval = c(2006, 2020), delta_intervals = c(2006, 2008, 2010, 2014, 2020))
 ```
 
     ## 
     ##  >> Extracting Population Size
+
+    ## Scale for x is already present.
+    ## Adding another scale for x, which will replace the existing scale.
+    ## Scale for x is already present.
+    ## Adding another scale for x, which will replace the existing scale.
+
+    ## 
     ##  >> Extracting Inbreeding
+
+    ## Scale for x is already present.
+    ## Adding another scale for x, which will replace the existing scale.
+
+    ## 
     ##  >> Extracting Generation Intervals
     ##  >> Extracting Mean Age of Fathers
+
+    ## Scale for x is already present.
+    ## Adding another scale for x, which will replace the existing scale.
+
+    ## 
     ##  >> Extracting Mean Age of Mothers
+
+    ## Scale for x is already present.
+    ## Adding another scale for x, which will replace the existing scale.
+
+    ## 
     ##  >> Extracting Pedigree Completeness
+
+    ## Scale for x is already present.
+    ## Adding another scale for x, which will replace the existing scale.
+
+    ## 
     ##  >> Extracting Litter Size Information
+
+    ## Scale for x is already present.
+    ## Adding another scale for x, which will replace the existing scale.
+
+    ## 
     ##  >> Extracting Top Sires Contribution
+
+    ## Scale for x is already present.
+    ## Adding another scale for x, which will replace the existing scale.
+
+    ## 
+    ##  >> Extracting Compute Deltas
 
 # Description
 
@@ -66,6 +107,14 @@ print(sim_results$sex_ratio_plot)
 
 ![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
 
+## Sex ratio
+
+``` r
+print(sim_results$sex_ratio_plot)
+```
+
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
 ## Inbreeding
 
 ``` r
@@ -99,11 +148,7 @@ kable(sim_results$inbreeding)
 print(sim_results$inbreeding_plot)
 ```
 
-    ## Warning: Removed 6 rows containing missing values (`geom_line()`).
-
-    ## Warning: Removed 6 rows containing missing values (`geom_point()`).
-
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ## Generation intervals
 
@@ -173,7 +218,7 @@ kable(sim_results$mean_age_fathers)
 print(sim_results$mean_age_fathers_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ## Mean Age of Mothers
 
@@ -208,7 +253,7 @@ kable(sim_results$mean_age_mothers)
 print(sim_results$mean_age_mothers_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ## Pedigree completeness
 
@@ -251,7 +296,7 @@ print(sim_results$pedigree_completeness_plot)
 print(sim_results$average_generation_equivalent_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ## Litter size
 
@@ -286,7 +331,7 @@ kable(sim_results$littersize)
 print(sim_results$littersize_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ## Top Sires
 
@@ -321,4 +366,19 @@ kable(sim_results$topsires)
 print(sim_results$topsires_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+## Annual and generational rates
+
+F = inbreeding, f = kinship, L = generation interval.
+
+``` r
+kable(sim_results$deltas)
+```
+
+| intervals | annual_delta_F | annual_delta_f | average_L | generation_delta_F | generation_delta_f |
+|:----------|---------------:|---------------:|----------:|-------------------:|-------------------:|
+| 2006-2008 |           0.19 |           0.44 |      1.39 |               0.26 |               0.61 |
+| 2008-2010 |           1.13 |           0.93 |      2.19 |               2.47 |               2.04 |
+| 2010-2014 |           0.74 |           0.57 |      2.19 |               1.61 |               1.25 |
+| 2014-2020 |           0.19 |           0.57 |      2.23 |               0.42 |               1.26 |
