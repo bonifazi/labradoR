@@ -69,7 +69,9 @@ Use the argument `xinterval` to show plots on a specific interval of
 years.
 
 Use the argument `delta_intervals` to return rates of inbreeding and
-kinship between provided years. For example:
+kinship between provided years.
+
+For example:
 
 ``` r
 output <- process_retriever(

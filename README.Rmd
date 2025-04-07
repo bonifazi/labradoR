@@ -58,7 +58,9 @@ The output is a list with `data.frames` and associated ggplot2 plots.
 
 Use the argument `xinterval` to show plots on a specific interval of years.
 
-Use the argument `delta_intervals` to return rates of inbreeding and kinship between provided years. For example:
+Use the argument `delta_intervals` to return rates of inbreeding and kinship between provided years.
+
+For example:
 
 ``` r
 output <- process_retriever(
