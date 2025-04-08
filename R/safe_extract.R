@@ -8,7 +8,8 @@
 #' @param ... Additional arguments passed to `function_to_exec`.
 #' @param return_error Logical; if `TRUE`, errors and warnings are logged in `error_log`.
 #'
-#' @return The result of `function_to_exec(...)` if successful, otherwise `NULL`.
+#' @return The result of `function_to_exec(...)` if successful, otherwise `NULL` if error is detected.
+#'         If a warning or message is detected, the results of `function_to_exec()` are still returned.
 #' @examples
 #' error_log <- list()  # Initialize an error log
 #' safe_extract(log, -1)  # Example usage with a function that may generate warnings/errors
@@ -23,7 +24,17 @@ safe_extract <- function(function_to_exec, ..., return_error = TRUE) {
   # print(get("error_log", envir = parent_env))
 
   result <- tryCatch({
-    function_to_exec(...)
+    withCallingHandlers({
+      function_to_exec(...)
+    }, warning = function(w) { # warnings will return results nonetheless
+      warn_msg <- paste("Warning in", func_name, ":", w$message)
+      cat("\n", warn_msg, "\n")
+      if (return_error) {
+        error_log <- get("error_log", envir = parent_env)
+        new_error_log <- c(error_log, list(warn_msg))
+        assign("error_log", new_error_log, envir = parent_env)
+      }
+    })
   }, error = function(e) {
     error_msg <- paste("Error in", func_name, ":", e$message)
     cat("\n", error_msg, "\n")
@@ -34,18 +45,9 @@ safe_extract <- function(function_to_exec, ..., return_error = TRUE) {
       assign("error_log", new_error_log, envir = parent_env)
     }
     return(NULL)
-  }, warning = function(w) {
-    warn_msg <- paste("Warning in", func_name, ":", w$message)
-    cat("\n", warn_msg, "\n")
-    if (return_error) {
-      error_log <- get("error_log", envir = parent_env)
-      new_error_log <- c(error_log, list(warn_msg))
-      assign("error_log", new_error_log, envir = parent_env)
-    }
-    return(NULL)
   })
 
-  # # After the extraction attempt, print the updated content of error_log
+  # After the extraction attempt, print the updated content of error_log
   # cat("\n Updated error_log content after extraction attempt: \n")
   # print(get("error_log", envir = parent_env))
 

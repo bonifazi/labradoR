@@ -1,5 +1,9 @@
 # labradoR
 
+## Version 1.1.3
+### Bug fixes
+- fixed `safe_extract.R` to not return `NULL` but results when a warning or message is detected.
+
 ## Version 1.1.2
 
 ### Bug fixes
