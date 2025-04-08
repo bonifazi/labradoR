@@ -14,7 +14,8 @@ safe_extract(function_to_exec, ..., return_error = TRUE)
 \item{return_error}{Logical; if \code{TRUE}, errors and warnings are logged in \code{error_log}.}
 }
 \value{
-The result of \code{function_to_exec(...)} if successful, otherwise \code{NULL}.
+The result of \code{function_to_exec(...)} if successful, otherwise \code{NULL} if error is detected.
+If a warning or message is detected, the results of \code{function_to_exec()} are still returned.
 }
 \description{
 This function attempts to execute a given function and captures any errors

@@ -32,7 +32,7 @@ extract_text <- function(content_lines, keyword) {
   } else if (length(matches) > 1) {
     keyword_line <- matches[1]
     warning(
-      paste0("Keyword '", keyword, "' was found in multiple places. Only the first match is going to be used. \n Matched line numbers are:\n", matches),
+      paste0("Keyword '", keyword, "' was found in multiple places. Only the first match is going to be used. \n Matched line numbers are:\n"),
       paste0(matches, sep = " ")
     )
   # if keyword is not found, return what info we are looking for that are not matched
