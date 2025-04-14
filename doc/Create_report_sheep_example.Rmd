@@ -10,8 +10,13 @@ output: github_document
 ```{r setup, include=FALSE}
 # Load necessary libraries
 library(knitr)
+# devtools::install_github("bonifazi/labradoR", quiet = T)
 library(labradoR)
 options(warn = -1) # suppress warning messages
+```
+
+```{r}
+packageVersion("labradoR")
 ```
 
 Example of running labradoR (the `xinterval` and `delta_intervals` arguments are optional arguments).

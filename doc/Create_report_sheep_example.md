@@ -1,6 +1,12 @@
 Simulation Results Report
 ================
-2025-04-05
+2025-04-14
+
+``` r
+packageVersion("labradoR")
+```
+
+    ## [1] '1.1.4'
 
 Example of running labradoR (the `xinterval` and `delta_intervals`
 arguments are optional arguments).
@@ -99,13 +105,13 @@ kable(sim_results$pop_size)
 print(sim_results$pop_size_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
 print(sim_results$sex_ratio_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
 ## Sex ratio
 
@@ -113,7 +119,7 @@ print(sim_results$sex_ratio_plot)
 print(sim_results$sex_ratio_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ## Inbreeding
 
@@ -148,7 +154,7 @@ kable(sim_results$inbreeding)
 print(sim_results$inbreeding_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ## Generation intervals
 
@@ -218,7 +224,7 @@ kable(sim_results$mean_age_fathers)
 print(sim_results$mean_age_fathers_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ## Mean Age of Mothers
 
@@ -253,7 +259,7 @@ kable(sim_results$mean_age_mothers)
 print(sim_results$mean_age_mothers_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ## Pedigree completeness
 
@@ -288,7 +294,7 @@ kable(sim_results$pedigree_completeness)
 print(sim_results$pedigree_completeness_plot)
 ```
 
-    ## NULL
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ## Average Generation Equivalent
 
@@ -296,7 +302,7 @@ print(sim_results$pedigree_completeness_plot)
 print(sim_results$average_generation_equivalent_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ## Litter size
 
@@ -331,7 +337,7 @@ kable(sim_results$littersize)
 print(sim_results$littersize_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ## Top Sires
 
@@ -366,7 +372,7 @@ kable(sim_results$topsires)
 print(sim_results$topsires_plot)
 ```
 
-![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](Create_report_sheep_example_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ## Annual and generational rates
 
