@@ -1,6 +1,6 @@
 Package: labradoR
 Title: Read and Process Retriever's Output
-Version: 1.1.3
+Version: 1.1.4
 Authors@R: 
     person("Renzo", "Bonifazi", , "renzo.bonifazi@outlook.it", role = c("aut", "cre"),
            comment = c(ORCID = "https://orcid.org/0000-0002-1794-4708"))

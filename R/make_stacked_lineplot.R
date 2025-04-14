@@ -28,7 +28,7 @@
 
 make_stacked_lineplot <- function(data, dots = F, levels_order = NULL) {
   if(dots) {
-    plot_dots <- geom_point(position = "stack") # size = 2
+    plot_dots <- geom_point(position = "stack", size = 1)
   } else plot_dots <- NULL
   data %>%
     pivot_longer(cols = -Year,

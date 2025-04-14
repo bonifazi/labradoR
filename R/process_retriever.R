@@ -127,7 +127,7 @@ process_retriever <- function(file_name, language, verbose = T, xinterval = NULL
   results$pedigree_completeness <- safe_extract(extract_pedigree_completeness, content_lines, language)
 
   if(!is.null(results$pedigree_completeness)){
-    # results$pedigree_completeness_plot <-
+    results$pedigree_completeness_plot <-
       results$pedigree_completeness %>%
       # rename cols & skip average_generation_equivalent
       select(-average_generation_equivalent) %>%
@@ -136,14 +136,16 @@ process_retriever <- function(file_name, language, verbose = T, xinterval = NULL
       rowwise() %>%
       mutate(across('0':'5+', ~ . / sum(c_across('0':'5+')))) %>%
       ungroup() %>%
-      make_stacked_lineplot(dots = T) +
-      ylim(0,1.01) + # the .01 is to avoid small roundings corrections in ggplot
+      make_stacked_lineplot(dots = T, levels_order = c("0", "1", "2", "3", "4", "5+")) +
+      ylim(0,1.01) + # the .01 is to avoid small rounding corrections in ggplot
       interval +
       theme(legend.position = "bottom") +
       # scale_fill_discrete(breaks = c("0", "1", "2", "3", "4", "5+")) +
       scale_fill_manual(values = c("0" = "#e0f7fa", "1" = "#b2ebf2", "2" = "#80deea", "3" = "#4dd0e1", "4" = "#26c6da", "5+" = "#0079a1")) +
       labs(title = "Pedigree completedness",
-           subtitle = "Percentage of animals with N generations in pedigree completely known")
+           subtitle = "Percentage of animals with N generations in pedigree completely known",
+           y = "%")
+
 
     # plot average number of generation equivalent
     results$average_generation_equivalent_plot <- results$pedigree_completeness %>%
