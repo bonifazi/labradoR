@@ -1,5 +1,9 @@
 # labradoR
 
+## Version 1.1.5
+### Bug fixes
+- fixed bug in `process_retriever` for `mean_age_parents` plots
+
 ## Version 1.1.4
 ### Bug fixes
 - fixed `pedigree_completeness_plot` in output returned from `process_retriever`.

@@ -1,6 +1,6 @@
 Package: labradoR
 Title: Read and Process Retriever's Output
-Version: 1.1.4
+Version: 1.1.5
 Authors@R: 
     person("Renzo", "Bonifazi", , "renzo.bonifazi@outlook.it", role = c("aut", "cre"),
            comment = c(ORCID = "https://orcid.org/0000-0002-1794-4708"))
@@ -25,5 +25,7 @@ Depends:
     stringdist
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
+Config/testthat/edition: 3
