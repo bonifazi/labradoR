@@ -1,6 +1,6 @@
 
 test_that("processes English log file correctly", {
-  test_file <- "C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/upload/sheep_ped.out"
+  test_file <- testthat::test_path("sheep_ped.out")
 
   results <- process_retriever(test_file, "ENG", verbose = FALSE)
   expect_type(results, "list")
@@ -9,7 +9,7 @@ test_that("processes English log file correctly", {
 })
 
 test_that("processes Dutch log file correctly", {
-  test_file <- "tests/sheep_ped_nl.out"
+  test_file <- testthat::test_path("sheep_ped_nl.out")
 
   results <- process_retriever(test_file, "DUT", verbose = FALSE)
   expect_type(results, "list")
@@ -18,7 +18,7 @@ test_that("processes Dutch log file correctly", {
 })
 
 test_that("handles xinterval correctly", {
-  test_file <- "tests/sheep_ped.out"
+  test_file <- testthat::test_path("sheep_ped.out")
 
   expect_error(process_retriever(test_file, "ENG", xinterval = "invalid"))
   expect_error(process_retriever(test_file, "ENG", xinterval = 2000))
