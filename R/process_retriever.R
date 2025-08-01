@@ -30,7 +30,8 @@
 #' @importFrom stringr str_split
 #' @importFrom readr read_file
 #' @importFrom dplyr %>% mutate select starts_with any_of rowwise across c_across ungroup contains
-#' @import ggplot2
+#' @importFrom ggplot2 labs xlim ylim ylab theme scale_fill_manual scale_fill_discrete
+#' @importFrom stats setNames
 #'
 #' @export
 
@@ -81,7 +82,21 @@ process_retriever <- function(file_name, language, verbose = T, xinterval = NULL
   results$inbreeding <- safe_extract(extract_inbreeding, content_lines, language)
 
   if(!is.null(results$inbreeding)) {
-    results$inbreeding_plot <- make_linepoint_plot(data = results$inbreeding) +
+    results$inbreeding_plot <- make_linepoint_plot(
+        data = results$inbreeding,
+        # Define the order of levels (excluding Year)
+        order = c("F_all_animals", "f_inc.self", "f_exc.self", "f_parents", "f_sires", "f_dams"),
+
+        # Define better labels for plotting
+        label_map = c(
+          F_all_animals = "italic(F)[ped]",
+          f_inc.self    = "italic(f)['ped inc. self']",
+          f_exc.self    = "italic(f)['ped exc. self']",
+          f_parents     = "italic(f)[parents]",
+          f_sires       = "italic(f)[sires]",
+          f_dams        = "italic(f)[dams]"
+        )
+      ) +
       interval +
       labs(title = "Inbreeding & kinship")
   }

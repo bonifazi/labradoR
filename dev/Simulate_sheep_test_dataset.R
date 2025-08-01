@@ -6,8 +6,7 @@ library(MoBPS)
 
 # 1. Simulate sheep data ----------------------------------------------
 # From https://www.mobps.de/home, download the JSON of "Simple Sheep Advanced".
-population <- json.simulation(file = "C:/Users/bonif002/Downloads/Simple Sheep Advanced.json")
-
+population <- json.simulation(file = "C:/Users/bonif002/OneDrive/labradoR_simulation/Simple Sheep Advanced.json")
 
 # 1. extract pedigree and info -----------------------------------------------
 pedigree <- unique(get.pedigree(population, gen = 1:get.ngen(population), id = TRUE))
@@ -67,6 +66,9 @@ write.table(sheep_merged,
 # 4.1 move in Retriever.exe dir
 setwd("C:/Users/bonif002/OneDrive/labradoR_simulation/Retriever/www/")
 
+# run once in Dutch to create a test file, copy the output and then
+# run again as English
+
 # 4.2 Create the .ini file
 # Create the content for the inbreedingmonitor.ini file
 inbreedingmonitor_content <- c(
@@ -77,21 +79,33 @@ inbreedingmonitor_content <- c(
   "yyyy-mm-dd",          # date of birth format
   "rund",
   "M",                   # sex code for males
-  "en",                  # output language
+  "nl",                  # output language
   "y",
   "0",
   "0"
 )
 
-# 4.3 write to disk
-writeLines(inbreedingmonitor_content, "inbreedingmonitor.ini")
+for (lang in c("nl", "en")) {
+  # Update the language in the content
+  inbreedingmonitor_content[8] <- lang
 
-# 4.4 call .exe
-# system("inteeltmonitor007.exe")
-system("inteeltmonitor.exe")
-setwd("C:/Rpkgs/packages_development/labradoR/doc")
+  # 4.3 write to disk
+  writeLines(inbreedingmonitor_content, "inbreedingmonitor.ini")
+
+  # 4.4 call .exe
+  # system("inteeltmonitor007.exe")
+  system("inteeltmonitor.exe")
+  # take copy of nl one
+  if(lang == "nl") {
+    file.copy(from = "upload/sheep_ped.out", to = "upload/sheep_ped_nl.out", overwrite = TRUE)
+  }
+  rm(lang)
+}
+list.files("upload")
 
 # 5. Collect output and create the report check --------------------------------
+# move to the documentation directory
+setwd("C:/Rpkgs/packages_development/labradoR/doc")
 library(rmarkdown)
 
 # Create the report folder if it doesn't exist

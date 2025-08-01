@@ -26,6 +26,11 @@
 #' lines <- c("2020 25 30 35", "2021 26 31 36")
 #' extract_section(lines, column_names = c("Year", "Age_A", "Age_B", "Age_C"))
 #'
+#' @importFrom stringr str_replace_all str_split
+#' @importFrom purrr map discard
+#' @importFrom dplyr mutate across everything
+#' @importFrom utils read.fwf
+#'
 #' @export
 extract_section <- function(lines,
                             exclude_between_char = NA,
@@ -50,7 +55,7 @@ extract_section <- function(lines,
   if(anyNA(fixed_col_width)) {
     # Split each line by white space and remove empty elements
     split_lines <- str_split(lines, "\\s+") %>%
-      map(~ discard(.x, ~ .x == ""))
+      purrr::map(~ purrr::discard(.x, ~ .x == ""))
     # Convert the split lines into a data frame
     extr_data <- as.data.frame(do.call(rbind, split_lines), stringsAsFactors = F)
     # skip user-defined cols

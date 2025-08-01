@@ -6,16 +6,7 @@
 #' @param dots A logical (default = F) to turn on/off plotting dots following the stacked area lines
 #' @param levels_order A vector specifying the order of levels for stacking.
 #'
-#'
 #' @return A ggplot object representing the stacked area plot.
-#'
-#' @import dplyr tidyr ggsci ggplot2
-#' @importFrom dplyr %>%
-#' @importFrom tidyr pivot_longer
-#' @importFrom ggsci scale_color_npg
-#' @importFrom ggplot2 geom_area
-#' @importFrom ggplot2 guides
-#' @importFrom ggplot2 guide_legend
 #'
 #' @examples
 #' data <- data.frame(Year = c(2000, 2001, 2002),
@@ -23,6 +14,11 @@
 #'                    Group2 = c(5, 10, 8))
 #' levels_order <- c("Group1", "Group2")
 #' make_stacked_lineplot(data, levels_order = levels_order)
+#'
+#' @importFrom dplyr %>%
+#' @importFrom tidyr pivot_longer
+#' @importFrom ggplot2 ggplot aes geom_area geom_point scale_x_continuous guides guide_legend labs
+#' @importFrom ggsci scale_color_npg
 #'
 #' @export
 

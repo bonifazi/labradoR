@@ -7,17 +7,17 @@
 #'
 #' @return A ggplot object representing the stacked bar plot.
 #'
-#' @import dplyr tidyr ggthemes ggplot2
-#' @importFrom dplyr %>%
-#' @importFrom tidyr pivot_longer
-#' @importFrom ggsci scale_color_npg
-#'
 #' @examples
 #' data <- data.frame(Year = c(2000, 2001, 2002),
 #'                    Group1 = c(10, 20, 15),
 #'                    Group2 = c(5, 10, 8))
 #' levels_order <- c("Group1", "Group2")
 #' make_stacked_barplot(data, levels_order)
+#'
+#' @importFrom dplyr %>%
+#' @importFrom tidyr pivot_longer
+#' @importFrom ggplot2 ggplot aes geom_bar scale_x_continuous ylim labs guides guide_legend
+#' @importFrom ggsci scale_color_npg
 #'
 #' @export
 
