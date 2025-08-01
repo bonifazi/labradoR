@@ -6,3 +6,4 @@
 ^dev$
 ^doc$
 ^Meta$
+^codecov\.yml$

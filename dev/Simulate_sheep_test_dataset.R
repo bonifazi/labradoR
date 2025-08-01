@@ -103,6 +103,10 @@ for (lang in c("nl", "en")) {
 }
 list.files("upload")
 
+# copy files for testing in /tests
+file.copy(from = "upload/sheep_ped_nl.out", to = "C:/Rpkgs/packages_development/labradoR/tests/", overwrite = TRUE)
+file.copy(from = "upload/sheep_ped.out",    to = "C:/Rpkgs/packages_development/labradoR/tests/", overwrite = TRUE)
+
 # 5. Collect output and create the report check --------------------------------
 # move to the documentation directory
 setwd("C:/Rpkgs/packages_development/labradoR/doc")
