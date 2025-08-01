@@ -29,7 +29,8 @@ test_that("handles xinterval correctly", {
 })
 
 test_that("handles error logging correctly", {
-  withr::local_file(test_file <- tempfile())
+  test_file <- tempfile()
+  withr::local_file(test_file)
   writeLines("invalid content", test_file)
 
   results <- process_retriever(test_file, "ENG", return_error_log = TRUE, verbose = FALSE)
