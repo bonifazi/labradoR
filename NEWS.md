@@ -4,6 +4,7 @@
 ### Enhancements
 - created a Dutch version of sheep retrieveR output
 - added tests
+- added coverage in GitHub Actions
 - added option to provide labels to `make_line_plot`
 - improved visualization for kinship and inbreeding plot
 - polished functions so to use @importFrom rather than full @import
