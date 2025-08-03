@@ -10,7 +10,8 @@ Release](https://img.shields.io/github/v/release/bonifazi/labradoR)
 ![GitHub
 License](https://img.shields.io/github/license/bonifazi/labradoR)
 [![R-CMD-check](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml)
-
+[![Codecov test
+coverage](https://codecov.io/gh/bonifazi/labradoR/graph/badge.svg)](https://app.codecov.io/gh/bonifazi/labradoR)
 <!-- badges: end -->
 
 <img src="man/figures/logo_labradoR.png" align="right" width="200"/>

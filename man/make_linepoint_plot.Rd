@@ -2,23 +2,41 @@
 % Please edit documentation in R/make_linepoint_plot.R
 \name{make_linepoint_plot}
 \alias{make_linepoint_plot}
-\title{Make a line plot with points with year of birth on the x-axis}
+\title{Make a line plot with points and customizable ordering & legend labels}
 \usage{
-make_linepoint_plot(data)
+make_linepoint_plot(data, order = NULL, label_map = NULL)
 }
 \arguments{
-\item{data}{A data frame containing the data to be plotted. First column must be named 'Year'.}
+\item{data}{A data frame containing the data to be plotted. The first column must be named \code{Year}.}
+
+\item{order}{Optional character vector giving the desired order of the grouping variables;
+any entries not present in the data will be ignored.}
+
+\item{label_map}{Optional named character vector for relabeling the legend. Names must match
+the original group levels and values must be valid R expressions (as strings) to be parsed,
+e.g. \code{c(F_ped = "italic(F)[ped]", f_ped = "italic(f)[ped]")}.}
 }
 \value{
-A ggplot object representing the line plot with points.
+A \code{ggplot} object representing the line‐and‐point plot
 }
 \description{
-This function generates a line plot with line-points for each column in the input data and year of birth in the x-axis
+This function generates a line plot with points for each column in the input data,
+using the first column (\code{Year}) on the x‐axis. You can specify a custom drawing order
+of groups and supply a named \code{label_map} to relabel and parse legend entries.
 }
 \examples{
-data <- data.frame(Year = c(2000, 2001, 2002),
-                   Group1 = c(10, 20, 15),
-                   Group2 = c(5, 10, 8))
-make_linepoint_plot(data)
+df <- data.frame(
+  Year = 2000:2005,
+  A    = c(1.0, 2.5, 3.2, 2.8, 4.1, 3.9),
+  B    = c(0.8, 1.9, 2.7, 2.4, 3.3, 2.8)
+)
+# Default plot
+make_linepoint_plot(df)
+
+# Custom order and parsed legend labels
+order_vec <- c("B", "A")
+labels   <- c(A = "alpha", B = "beta")
+make_linepoint_plot(df, order = order_vec, label_map = labels)
+
 
 }

@@ -1,5 +1,19 @@
 # labradoR
 
+## Version 1.1.6
+### Enhancements
+- created a Dutch version of sheep retrieveR output
+- added tests
+- added coverage in GitHub Actions
+- added option to provide labels to `make_line_plot`
+- improved visualization for kinship and inbreeding plot
+- polished functions so to use @importFrom rather than full @import
+- fixed a conflict with packages loading
+- fixed warning and notes from devtools::check()
+- removed vignette dir as was empty
+- updated DESCRIPTION and docs
+- added `globalVariables.R`
+
 ## Version 1.1.5
 ### Bug fixes
 - fixed bug in `process_retriever` for `mean_age_parents` plots

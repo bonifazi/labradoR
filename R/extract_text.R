@@ -18,13 +18,20 @@
 #'
 #' @examples
 #'
-#' content <- c("Some text", "Keyword", "______", "col1_title   col2_title  col3_title", "______", "Extract this text", "some other text to extract", "______", "More text")
+#' content <- c("Some text", "Keyword", "______",
+#'   "col1_title   col2_title  col3_title", "______",
+#'   "Extract this text", "some other text to extract", "______",
+#'   "More text"
+#' )
 #' extract_text(content, "Keyword")
+#'
+#' @importFrom stringr str_which fixed
+#' @importFrom stringdist stringdistmatrix
 #'
 #' @export
 extract_text <- function(content_lines, keyword) {
   # Find keyword location on file
-  matches <- str_which(content_lines, fixed(keyword))
+  matches <- stringr::str_which(content_lines, fixed(keyword))
 
   # Give a warning if multiple matches are found
   if (length(matches) == 1) {
@@ -72,10 +79,10 @@ extract_text <- function(content_lines, keyword) {
   regex <- "^\\s*_{5,}$"
 
   # Find the first year in table based on regex
-  table_start <- str_which(content_lines[(keyword_line + 1):length(content_lines)], regex)[2] + keyword_line + 1
+  table_start <- stringr::str_which(content_lines[(keyword_line + 1):length(content_lines)], regex)[2] + keyword_line + 1
   if (is.na(table_start)) stop("Table start (underscores) not found after keyword")
   # Find the last year in table based on regex
-  table_end <- str_which(content_lines[table_start:length(content_lines)], regex)[1] + table_start - 2
+  table_end <- stringr::str_which(content_lines[table_start:length(content_lines)], regex)[1] + table_start - 2
   if (is.na(table_end)) stop("Table end (empty line) not found")
 
   # return content between first and last year in table

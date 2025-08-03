@@ -3,7 +3,9 @@
 #' This function defines a custom theme for use in plots within the Labrador package.
 #'
 #' @return A ggplot2 theme object.
-#' @import ggplot2
+#'
+#' @importFrom ggplot2 theme_bw theme element_text
+#'
 #' @export
 theme_labrador <- function() {
   theme_bw() +

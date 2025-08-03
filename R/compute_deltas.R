@@ -22,13 +22,18 @@
 #'
 #' @export
 #'
-#' @importFrom dplyr filter mutate summarise
-#' @importFrom dplyr %>%
+#' @importFrom dplyr %>% filter mutate summarise
+#' @importFrom stats coef lm
 #'
 #' @examples
 #' intervals <- c(2000, 2010, 2020)
-#' generation_intervals <- data.frame(Year = 2000:2020, mean_age_both_parents = runif(21, 2, 4))
-#' inbreeding <- data.frame(Year = 2000:2020, F_all_animals = runif(21, 0, 0.1), f_exc.self = runif(21, 0, 0.1))
+#' generation_intervals <- data.frame(
+#'   Year = 2000:2020, mean_age_both_parents = runif(21, 2, 4)
+#' )
+#' inbreeding <- data.frame(
+#'   Year = 2000:2020, F_all_animals = runif(21, 0, 0.1),
+#'   f_exc.self = runif(21, 0, 0.1)
+#' )
 #' compute_deltas(intervals, generation_intervals, inbreeding, 2)
 #'
 compute_deltas <- function(intervals, generation_intervals, inbreeding, round = 2) {
