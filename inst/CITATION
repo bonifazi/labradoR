@@ -1,0 +1,40 @@
+citHeader("To cite labradoR in publications, please use the following:")
+
+# Citation for the preprint
+citEntry(
+  entry    = "Article",
+  title    = "Impact of genomic selection on genetic diversity in five local European cattle breeds",
+  author   = personList(
+    person("R.", "Bonifazi"),
+    person("T.H.E.", "Meuwissen"),
+    person("P.", "Croiseau"),
+    person("G.", "Restoux"),
+    person("S.", "Minéry"),
+    person("J.J.", "Windig")
+  ),
+  journal  = "bioRxiv",
+  year     = "2025",
+  doi      = "10.1101/2025.09.08.674844",
+  url      = "https://www.biorxiv.org/content/early/2025/09/08/2025.09.08.674844",
+  textVersion = "Bonifazi R, Meuwissen THE, Croiseau P, Restoux G, Minéry S, Windig JJ (2025).
+  'Impact of genomic selection on genetic diversity in five local European cattle breeds.' bioRxiv.
+  doi:10.1101/2025.09.08.674844."
+)
+
+# Citation for the GitHub R package itself, with dynamic version
+citEntry(
+  entry    = "Manual",
+  title    = "{labradoR}: An R package for handling and post-processing Retriever output.",
+  author   = personList(
+    person("R.", "Bonifazi")
+  ),
+  year     = "2025",
+  note     = paste0("R package version ", as.character(packageVersion("labradoR")),
+                    ", available at GitHub"),
+  url      = "https://github.com/bonifazi/labradoR",
+  textVersion = paste0(
+    "Bonifazi R (2025). labradoR: An R package for handling and post-processing Retriever output. ",
+    "Version ", as.character(packageVersion("labradoR")),
+    ". Available at https://github.com/bonifazi/labradoR."
+  )
+)
