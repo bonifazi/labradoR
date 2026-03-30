@@ -1,5 +1,9 @@
 # labradoR
 
+## Version 1.1.8
+### Enhancements
+- improved README and documentation
+
 ## Version 1.1.7
 ### Enhancements
 - improved README and documentation
