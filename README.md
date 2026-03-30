@@ -7,8 +7,8 @@
 
 ![GitHub
 Release](https://img.shields.io/github/v/release/bonifazi/labradoR)
-![GitHub
-License](https://img.shields.io/github/license/bonifazi/labrador)
+![Static
+Badge](https://img.shields.io/badge/Licence%20-%20MIT%20-%20light%20green)
 [![R-CMD-check](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonifazi/labradoR/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/bonifazi/labradoR/graph/badge.svg)](https://app.codecov.io/gh/bonifazi/labradoR)
@@ -16,6 +16,7 @@ coverage](https://codecov.io/gh/bonifazi/labradoR/graph/badge.svg)](https://app.
 status](https://www.r-pkg.org/badges/version/labradoR)](https://CRAN.R-project.org/package=labradoR)
 ![GitHub Downloads (all assets, all
 releases)](https://img.shields.io/github/downloads/bonifazi/labrador/total)
+
 <!-- badges: end -->
 
 <img src="man/figures/logo_labradoR.png" align="right" width="200"/>
@@ -122,28 +123,31 @@ show much more uneven distributions.
 
 ## Citation
 
-If you use the `labradoR` package in your research, please cite it as
-follows:
+If you use the `labradoR` package, please cite it as follows:
 
-1.  **Citing the Software**
+**Citing the Associated Paper and Software**
 
-    To cite the software directly, you can use the following format in
-    your work:
+For now, you can refer to the [associated
+preprint](https://www.biorxiv.org/content/early/2025/09/08/2025.09.08.674844),
+and R package, using:
 
-    - Bonifazi, R. (2025). labradoR: An R package for handling and
-      post-processing Retriever output. Version 1.1.0. Retrieved from
-      <https://github.com/bonifazi/labradoR>.
-
-2.  **Citing the Associated Paper**
-
-    A paper is currently in preparation. For now, you can refer to the
-    associated presentation:
-
-    - Winding, J. J., Meuwissen, T. H. E., Croiseau, P., Restoux, G., &
-      Bonifazi, R. (2023). Impact of genomic selection on genetic
-      diversity in five European local cattle breeds. Proceedings of the
-      74th Annual Meeting of the European Federation of Animal Science,
-      Lyon, France (p. 160).
+``` r
+citation("labradoR")
+#> To cite labradoR in publications, please use the following:
+#> 
+#>   Bonifazi R, Meuwissen THE, Croiseau P, Restoux G, Minéry S, Windig JJ
+#>   (2025).  'Impact of genomic selection on genetic diversity in five
+#>   local European cattle breeds.' bioRxiv.
+#>   doi:10.1101/2025.09.08.674844.
+#> 
+#>   Bonifazi R (2025). labradoR: An R package for handling and
+#>   post-processing Retriever output. Version 1.1.7. Available at
+#>   https://github.com/bonifazi/labradoR.
+#> 
+#> To see these entries in BibTeX format, use 'print(<citation>,
+#> bibtex=TRUE)', 'toBibtex(.)', or set
+#> 'options(citation.bibtex.max=999)'.
+```
 
 ## Contributing
 

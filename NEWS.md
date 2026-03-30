@@ -1,5 +1,9 @@
 # labradoR
 
+## Version 1.1.7
+### Enhancements
+- improved README and documentation
+
 ## Version 1.1.6
 ### Enhancements
 - created a Dutch version of sheep retrieveR output
